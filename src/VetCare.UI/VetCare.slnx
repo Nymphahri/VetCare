@@ -1,4 +1,0 @@
-<Solution>
-  <Project Path="../src/VetCare.Logica/VetCare.Logica.csproj" />
-  <Project Path="VetCare.UI.csproj" />
-</Solution>

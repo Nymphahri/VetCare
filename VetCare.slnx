@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="VetCare.Datos/VetCare.Datos.csproj" Id="36e4aa33-421d-4b75-8b29-0703c86b45bb" />
+  <Project Path="VetCare.Logica/VetCare.Logica.csproj" Id="3957e1a6-9a49-4045-8a52-b15038a4b286" />
+</Solution>

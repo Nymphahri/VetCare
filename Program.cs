@@ -1,4 +1,4 @@
-namespace VetCare.UI
+namespace VetCare
 {
     internal static class Program
     {

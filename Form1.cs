@@ -1,4 +1,4 @@
-namespace VetCare.UI
+namespace VetCare
 {
     public partial class Form1 : Form
     {
