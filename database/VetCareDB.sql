@@ -14,7 +14,7 @@ USE VetCareDB;
 GO
 
 /*
-* Crea una tabla solo si no existe.
+* Crea una tabla sólo si no existe.
 */
 IF OBJECT_ID('dbo.Propietario', 'U') IS NULL
 BEGIN
@@ -151,9 +151,34 @@ BEGIN
 END
 GO
 
-/* Datos inventados para probar la base.
- * Solo se insertan si las tablas están vacías, así que
- * volver a ejecutar el script no duplica ni borra nada.
+/* Un servicio no se repite en la misma cita: si se aplica varias
+ * veces, se usa el campo Cantidad. Se agrega aparte para que también
+ * funcione si DetalleCita ya existía.
+*/
+IF NOT EXISTS (SELECT 1 FROM sys.key_constraints
+               WHERE name = 'UQ_DetalleCita_Cita_Servicio'
+                 AND parent_object_id = OBJECT_ID('dbo.DetalleCita'))
+BEGIN
+    ALTER TABLE DetalleCita
+        ADD CONSTRAINT UQ_DetalleCita_Cita_Servicio UNIQUE (IdCita, IdServicio);
+END
+GO
+
+/* Usuarios para iniciar sesión. Se crean aparte de los demás datos de
+ * prueba para que siempre exista al menos un usuario con el que entrar.
+ * Solo se insertan si la tabla Usuario está vacía.
+*/
+IF NOT EXISTS (SELECT 1 FROM Usuario)
+BEGIN
+    INSERT INTO Usuario (NombreUsuario, ContrasenaHash, Rol)
+    VALUES ('admin',     CONVERT(VARCHAR(64), HASHBYTES('SHA2_256', 'admin123'), 2), 'Administrador'),
+           ('recepcion', CONVERT(VARCHAR(64), HASHBYTES('SHA2_256', 'recep123'), 2), 'Recepcionista');
+END
+GO
+
+/* Datos ficticios para probar la base (no corresponden a personas reales).
+ * Solo se insertan si las tablas están vacías, así que volver a
+ * ejecutar el script no duplica ni borra nada.
 */
 IF NOT EXISTS (SELECT 1 FROM Propietario)
    AND NOT EXISTS (SELECT 1 FROM Veterinario)
@@ -166,12 +191,12 @@ BEGIN
             @IdCita2       INT;
 
     INSERT INTO Propietario (Cedula, Nombre, Apellidos, Telefono, Correo)
-    VALUES ('2-0801-0123', 'Grace', 'Romero Sanabria', '7878-2020', 'gracy.romero@correo.com');
-    SET @IdPropietario = SCOPE_IDENTITY();
+    VALUES ('1-1234-5678', 'Carlos', 'Mora Jiménez', '8888-1234', 'carlos.mora@example.com');
+        SET @IdPropietario = SCOPE_IDENTITY();
 
     INSERT INTO Veterinario (Nombre, Apellidos, Especialidad, Telefono)
-    VALUES ('María', 'Sanabria Mora', 'Medicina general', '8800-0088');
-    SET @IdVeterinario = SCOPE_IDENTITY();
+    VALUES ('Andrea', 'Vargas Solís', 'Medicina general', '8800-0088');
+        SET @IdVeterinario = SCOPE_IDENTITY();
 
     INSERT INTO Servicio (Nombre, Descripcion, Precio)
     VALUES ('Consulta general',     'Revisión general de la mascota', 15000.00),
@@ -179,23 +204,19 @@ BEGIN
            ('Baño y corte de pelo', 'Servicio de estética',           10000.00),
            ('Desparasitación',      'Tratamiento antiparasitario',     8000.00);
 
-    INSERT INTO Usuario (NombreUsuario, ContrasenaHash, Rol)
-    VALUES ('admin',     CONVERT(VARCHAR(64), HASHBYTES('SHA2_256', 'admin123'), 2), 'Administrador'),
-           ('recepcion', CONVERT(VARCHAR(64), HASHBYTES('SHA2_256', 'recep123'), 2), 'Recepcionista');
-
     INSERT INTO Mascota (IdPropietario, Nombre, Especie, Raza, FechaNacimiento)
-    VALUES (@IdPropietario, 'Lulu', 'Gato', 'Mestizo', '2014-02-15');
-    SET @IdMascota = SCOPE_IDENTITY();
+    VALUES (@IdPropietario, 'Max', 'Perro', 'Labrador', '2020-05-10');
+        SET @IdMascota = SCOPE_IDENTITY();
 
     INSERT INTO Cita (IdMascota, IdVeterinario, FechaHora, Estado, Motivo)
     VALUES (@IdMascota, @IdVeterinario, '2026-10-15 09:00', 'Confirmada', 'Control anual');
-    SET @IdCita1 = SCOPE_IDENTITY();
+        SET @IdCita1 = SCOPE_IDENTITY();
 
     INSERT INTO Cita (IdMascota, IdVeterinario, FechaHora, Estado, Motivo)
     VALUES (@IdMascota, @IdVeterinario, '2026-10-15 10:00', 'Pendiente', 'Vacuna anual');
-    SET @IdCita2 = SCOPE_IDENTITY();
+        SET @IdCita2 = SCOPE_IDENTITY();
 
-    /* El precio se copia del catálogo en el momento de la cita. 
+    /* El precio se copia del catálogo en el momento de la cita.
     */
     INSERT INTO DetalleCita (IdCita, IdServicio, Cantidad, PrecioAplicado)
     SELECT @IdCita1, IdServicio, 1, Precio

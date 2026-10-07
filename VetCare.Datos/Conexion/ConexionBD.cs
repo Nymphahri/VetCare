@@ -4,12 +4,14 @@ namespace VetCare.Datos.Conexion
 {
     public class ConexionBD
     {
-        private readonly string cadenaConexion =
-            @"Server=GRACY\SQLEXPRESS;Database=VetCareDB;Trusted_Connection=True;";
+        // El punto (.) significa "este equipo". Si la instancia de SQL Server
+        // se llama distinto, solo hay que cambiar esta línea.
+        private const string CadenaConexion =
+            @"Server=.\SQLEXPRESS;Database=VetCareDB;Integrated Security=True;";
 
         public SqlConnection ObtenerConexion()
         {
-            return new SqlConnection(cadenaConexion);
+            return new SqlConnection(CadenaConexion);
         }
     }
 }

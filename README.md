@@ -1,115 +1,67 @@
 # VetCare
 
-Sistema CRUD para administrar una clínica veterinaria pequeña,
-permitiendo gestionar propietarios, mascotas, veterinarios, servicios y citas.
+Sistema de escritorio para administrar una clínica veterinaria poco conocida:
+propietarios, mascotas, veterinarios, servicios y citas.
 
-Proyecto de Programación II  
+Primer avance (diseño y base de datos). La aplicación aún está en desarrollo.
 
-> **Estado:** Primer avance (diseño y base de datos).  
-> La aplicación se encuentra actualmente en desarrollo.
-
----
+***
 
 ## Descripción
 
-VetCare es un sistema de escritorio desarrollado para organizar la
-información básica de una clínica veterinaria pequeña.
-
-El sistema busca centralizar los datos de propietarios, mascotas,
-veterinarios, servicios y citas, facilitando la consulta y actualización
-de la información.
-
-También se contempla el control de los estados de las citas, la
-administración de los servicios aplicados y el cálculo de los montos
-correspondientes.
-
----
-
-### Estado actual del proyecto
-
-Actualmente el proyecto se encuentra en la etapa de diseño y base de
-datos.
-En esta etapa se han desarrollado:
-- Análisis del problema.
-- Objetivos.
-- Alcance.
-- Requisitos funcionales.
-- Diseño preliminar.
-- Modelo entidad-relación.
-- Modelo relacional.
-- Diccionario de datos.
-- Script de creación de la base de datos.
-- Diagrama de clases.
-- Organización inicial del proyecto.
-- Estructura de las capas.
-- Repositorio de GitHub.
+VetCare centraliza la información básica de una clínica veterinaria pequeña
+para que recepción pueda consultarla y actualizarla sin cuadernos ni hojas de
+cálculo. También controla el estado de las citas, los servicios aplicados en
+cada una y el cálculo de los montos.
 
 ## Funcionalidades previstas
 
 - Inicio de sesión con los roles **Administrador** y **Recepcionista**.
-- Registro de propietarios.
-- Consulta, modificación y eliminación de propietarios.
-- Registro de mascotas asociadas a un propietario.
-- Consulta, modificación y eliminación de mascotas.
-- Registro, consulta, modificación y eliminación de veterinarios.
+- Registro, consulta, modificación y eliminación de propietarios, mascotas y veterinarios.
 - Administración del catálogo de servicios.
-- Programación de citas.
-- Control de estados de las citas:
-  - Pendiente
-  - Confirmada
-  - Atendida
-  - Cancelada
-- Control para evitar dos citas a la misma hora para un mismo veterinario.
-- Registro de servicios aplicados en cada cita.
-- Cálculo de subtotales y totales.
+- Programación de citas con control de estado: Pendiente, Confirmada, Atendida y Cancelada.
+- Control para que un veterinario no tenga dos citas a la misma hora.
+- Registro de los servicios aplicados en cada cita, con subtotales y total.
 - Búsqueda y filtrado de información.
-- Validación de datos ingresados por el usuario.
-- Mensajes de confirmación, advertencia y error.
+- Validación de datos y mensajes de confirmación, advertencia y error.
 
----
+## Avance entregado
 
-## Arquitectura del proyecto
+- Análisis del problema, objetivos, alcance y requisitos funcionales.
+- Diseño preliminar de la solución.
+- Diagrama de clases, modelo entidad-relación y modelo relacional.
+- Diccionario de datos.
+- Script de creación de la base de datos (`database/VetCareDB.sql`).
+- Estructura inicial de la solución en tres capas.
 
-El proyecto está organizado mediante tres capas:
+El documento completo está en [`docs/avance.pdf`](docs/avance.pdf).
 
-### VetCare.UI
+## Diagramas
 
-Corresponde a la capa de presentación.
+[`docs/diagramas/`](docs/diagramas/).
 
-Contiene los formularios y controles utilizados para interactuar con el
-usuario.
+## Arquitectura
 
-### VetCare.Logica
+La solución se divide en tres capas:
 
-Corresponde a la capa de lógica.
+| Proyecto | Capa | Contenido |
+|---|---|---|
+| `VetCare.UI` | Presentación | Formularios y controles de Windows Forms. |
+| `VetCare.Logica` | Lógica | Clases, reglas del negocio y validaciones. |
+| `VetCare.Datos` | Acceso a datos | Conexión y consultas a SQL Server. |
 
-Contiene las clases, reglas, validaciones y procesamiento de la
-información del sistema.
-
-### VetCare.Datos
-
-Corresponde a la capa de acceso a datos.
-
-Contiene la conexión con SQL Server y las operaciones necesarias para
-trabajar con la base de datos.
-
-La comunicación entre las capas seguirá el siguiente esquema:
+Los formularios no hablan directamente con la base de datos:
 
 ```
-VetCare.UI
-    ↓
-VetCare.Logica
-    ↓
-VetCare.Datos
-    ↓
-SQL Server
+VetCare.UI  ->  VetCare.Logica  ->  VetCare.Datos  ->  SQL Server
 ```
 
-### Estructura del proyecto
+## Estructura del repositorio
 
+```
 VetCare/
-│
 ├── database/
+│   ├── Consultas.sql
 │   └── VetCareDB.sql
 │
 ├── docs/
@@ -117,81 +69,77 @@ VetCare/
 │   │   ├── DiagramaClases.png
 │   │   ├── DiagramaER.png
 │   │   └── ModeloRelacionalVetCareDB.png
-│   │
 │   └── avance.pdf
 │
 ├── VetCare.Datos/
-│   ├── Conexion/
-│   │   └── ConexionBD.cs
-│   └── ...
+│   └── Conexion/
+│       └── ConexionBD.cs
 │
 ├── VetCare.Logica/
-│   └── ...
-│
 ├── VetCare.UI/
-│   ├── Properties/
-│   ├── App.config
-│   ├── Form1.cs
-│   ├── Form1.Designer.cs
-│   ├── Program.cs
-│   └── VetCare.UI.csproj
-│
+├── .gitattributes
 ├── .gitignore
 ├── README.md
 └── VetCare.slnx
+```
 
-### Base de datos
+## Requisitos
 
-El script de creación de la base de datos se encuentra en: database/VetCareDB.sql
+- Windows 10 u 11.
+- Visual Studio 2022 (versión 17.13 o superior, por el formato `.slnx`) con la carga de trabajo **Desarrollo de escritorio con .NET**.
+- .NET Framework 4.8. Es la versión compatible con el entorno del curso.
+- SQL Server Express (instancia `SQLEXPRESS`).
+- SQL Server Management Studio (SSMS).
 
-### Cómo ejecutar la base de datos y las tecnologías utilizadas
+## Cómo crear la base de datos
 
-Requisitos
-- **C#**
-- **Windows Forms**
-- **Visual Studio**
-- **Microsoft SQL Server**
-- **SQL Server Management Studio (SSMS)**
-- **Git**
-- **GitHub**
-- **Framework .NET 4.8** (La versión de .NET utilizada debe ser compatible con el entorno
-proporcionado por el docente. No se pudo utilizar la versión más reciente.)
+1. Abrir SSMS y conectarse a la instancia `.\SQLEXPRESS`.
+2. Abrir el archivo `database/VetCareDB.sql`.
+3. Ejecutar el script completo.
+4. Verificar que existan las siete tablas: `Cita`, `DetalleCita`, `Mascota`, `Propietario`, `Servicio`, `Usuario` y `Veterinario`.
+5. Para ver el contenido de las tablas, ejecutar el script en `database/Consultas.sql`.
 
-Pasos
-1. Abrir SQL Server Management Studio.
-2. Conectarse a la instancia de SQL Server correspondiente.
-3. Abrir el archivo: database/VetCareDB.sql
-4. Ejecutar el script.
-5. Comprobar que la base de datos VetCareDB haya sido creada correctamente.
-6. Verificar que existan las siete tablas del sistema.
-El script está diseñado para poder ejecutarse nuevamente sin eliminar
-los datos existentes.
+El script se puede ejecutar más de una vez: solo crea lo que no existe y no borra datos.
 
-### Cómo ejecutar la aplicación
+## Usuarios de prueba
 
-1. Abrir el archivo:
-VetCare.slnx
+El script crea dos usuarios para poder probar el inicio de sesión. Son solo para pruebas.
 
-2. Esperar a que Visual Studio cargue los tres proyectos:
-VetCare.Datos
-VetCare.Logica
-VetCare.UI
+| Usuario | Contraseña | Rol |
+|---|---|---|
+| `admin` | `admin123` | Administrador |
+| `recepcion` | `recep123` | Recepcionista |
 
-3. Establecer VetCare.UI como proyecto de inicio.
-4. Ejecutar la aplicación desde Visual Studio.
+Las contraseñas se guardan como hash SHA-256, no en texto plano para evitar riesgos en la seguridad.
 
-### Autoría
+## Cómo ejecutar la aplicación
 
-Grace Romero Sanabria
-Estudiante de Ingeniería de Sistemas.
+1. Abrir `VetCare.slnx` en Visual Studio.
+2. Establecer `VetCare.UI` como proyecto de inicio.
+3. Ejecutar con `F5`.
 
-### Uso de inteligencia artificial
+### Conexión a SQL Server
 
-Ver en el documento: docs/avance.pdf.
+La cadena de conexión está en `VetCare.Datos/Conexion/ConexionBD.cs` y usa
+autenticación de Windows contra `.\SQLEXPRESS`:
 
-### Repositorio
+```
+Server=.\SQLEXPRESS;Database=VetCareDB;Integrated Security=True;
+```
 
-Repositorio del proyecto:
+Si la instancia de SQL Server tiene otro nombre, hay que cambiar el valor de
+`Server` en ese archivo.
+
+## Autoría
+
+Grace Romero Sanabria, estudiante de Ingeniería de Sistemas.
+
+## Uso de inteligencia artificial
+
+La declaración completa está en el documento [`docs/avance.pdf`](docs/avance.pdf).
+
+## Repositorio
+
 https://github.com/Nymphahri/VetCare
 
 ```

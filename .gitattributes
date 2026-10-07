@@ -1,0 +1,7 @@
+# Normaliza los saltos de línea entre Windows y otros sistemas
+* text=auto
+
+# Archivos binarios: git no debe tocarlos
+*.png binary
+*.jpg binary
+*.pdf binary
