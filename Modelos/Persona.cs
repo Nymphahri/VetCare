@@ -1,6 +1,6 @@
 ﻿namespace VetCare.UI.Modelos
 {
-    //Esta clase representa a una persona con propiedades básicas como nombre, apellidos y teléfono.
+    // Esta clase representa a una persona con propiedades básicas como nombre, apellidos y teléfono.
     public abstract class Persona
     {
         public string Nombre { get; set; }
