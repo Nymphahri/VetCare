@@ -1,7 +1,6 @@
 ﻿namespace VetCare.UI.Modelos
 {
     // Esta clase representa a un propietario, que hereda de la clase Persona y añade atributos propios.
-
     public class Propietario : Persona
     {
         public int IdPropietario { get; set; }
