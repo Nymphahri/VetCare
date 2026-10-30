@@ -8,6 +8,48 @@ namespace VetCare.UI.Datos
     {
         private ConexionBD conexion = new ConexionBD();
 
+        public List<Propietario> Listar()
+        {
+            List<Propietario> propietarios = new List<Propietario>();
+            string consulta = "SELECT IdPropietario, Cedula, Nombre, Apellidos, Telefono, Correo, FechaRegistro " +
+                "FROM Propietario ORDER BY IdPropietario DESC";
+            using SqlConnection conexionSql = conexion.ObtenerConexion();
+            using SqlCommand comando = new SqlCommand(consulta, conexionSql);
+            conexionSql.Open();
+            using SqlDataReader lector = comando.ExecuteReader();
+            while (lector.Read())
+            {
+                string correo = "";
+                if (!lector.IsDBNull(5)) correo = lector.GetString(5);
+                propietarios.Add(new Propietario(
+                    lector.GetInt32(0), lector.GetString(1), lector.GetString(2),
+                    lector.GetString(3), lector.GetString(4), correo, lector.GetDateTime(6)));
+            }
+            return propietarios;
+        }
+
+        public bool Modificar(Propietario propietario)
+        {
+            string consulta = "UPDATE Propietario SET Cedula = @Cedula, Nombre = @Nombre, " +
+                "Apellidos = @Apellidos, Telefono = @Telefono, Correo = @Correo " +
+                "WHERE IdPropietario = @IdPropietario";
+
+            using SqlConnection conexionSql = conexion.ObtenerConexion();
+            using SqlCommand comando = new SqlCommand(consulta, conexionSql);
+            comando.Parameters.AddWithValue("@IdPropietario", propietario.IdPropietario);
+            comando.Parameters.AddWithValue("@Cedula", propietario.Cedula);
+            comando.Parameters.AddWithValue("@Nombre", propietario.Nombre);
+            comando.Parameters.AddWithValue("@Apellidos", propietario.Apellidos);
+            comando.Parameters.AddWithValue("@Telefono", propietario.Telefono);
+            if (string.IsNullOrWhiteSpace(propietario.Correo))
+                comando.Parameters.AddWithValue("@Correo", DBNull.Value);
+            else
+                comando.Parameters.AddWithValue("@Correo", propietario.Correo);
+
+            conexionSql.Open();
+            return comando.ExecuteNonQuery() > 0;
+        }
+
         public bool Guardar(Propietario propietario)
         {
             string consulta = "INSERT INTO Propietario " +
@@ -21,7 +63,14 @@ namespace VetCare.UI.Datos
             comando.Parameters.AddWithValue("@Nombre", propietario.Nombre);
             comando.Parameters.AddWithValue("@Apellidos", propietario.Apellidos);
             comando.Parameters.AddWithValue("@Telefono", propietario.Telefono);
-            comando.Parameters.AddWithValue("@Correo", propietario.Correo);
+            if (string.IsNullOrWhiteSpace(propietario.Correo))
+            {
+                comando.Parameters.AddWithValue("@Correo", DBNull.Value);
+            }
+            else
+            {
+                comando.Parameters.AddWithValue("@Correo", propietario.Correo);
+            }
             comando.Parameters.AddWithValue("@FechaRegistro", propietario.FechaRegistro);
 
             conexionSql.Open();
