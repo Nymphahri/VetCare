@@ -28,6 +28,16 @@ namespace VetCare.UI.Datos
             return propietarios;
         }
 
+        public bool Eliminar(int idPropietario)
+        {
+            string consulta = "DELETE FROM Propietario WHERE IdPropietario = @IdPropietario";
+            using SqlConnection conexionSql = conexion.ObtenerConexion();
+            using SqlCommand comando = new SqlCommand(consulta, conexionSql);
+            comando.Parameters.AddWithValue("@IdPropietario", idPropietario);
+            conexionSql.Open();
+            return comando.ExecuteNonQuery() > 0;
+        }
+
         public bool Modificar(Propietario propietario)
         {
             string consulta = "UPDATE Propietario SET Cedula = @Cedula, Nombre = @Nombre, " +

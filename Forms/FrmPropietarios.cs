@@ -35,6 +35,52 @@ namespace VetCare
             GuardarPropietario(true);
         }
 
+        private void btnEliminar_Click(object? sender, EventArgs e)
+        {
+            if (idPropietarioSeleccionado == 0)
+            {
+                MessageBox.Show("Selecciona un propietario de la tabla.");
+                return;
+            }
+
+            DialogResult respuesta = MessageBox.Show(
+                "¿Deseas eliminar el propietario seleccionado, con el código " + idPropietarioSeleccionado +
+                "? Esta acción elimina su registro de la base de datos.",
+                "Confirmar eliminación", 
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning, 
+                MessageBoxDefaultButton.Button2);
+
+            if (respuesta != DialogResult.Yes) return;
+
+            try
+            {
+                if (propietarioLogica.Eliminar(idPropietarioSeleccionado))
+                    MessageBox.Show("Propietario eliminado correctamente.");
+                else
+                    MessageBox.Show("El propietario ya no existe. Se actualizará la lista.");
+
+                LimpiarCampos();
+                CargarPropietarios();
+            }
+
+            catch (SqlException ex)
+            {
+                if (ex.Number == 547)
+                    MessageBox.Show("No se puede eliminar este propietario porque tiene mascotas registradas.",
+                        "Propietario con mascotas", 
+                        MessageBoxButtons.OK, 
+                        MessageBoxIcon.Information);
+                else
+                    MessageBox.Show("No se pudo eliminar el propietario. Comprueba la conexión con SQL Server.", "Error al eliminar");
+            }
+
+            catch (Exception)
+            {
+                MessageBox.Show("Ocurrió un error inesperado al eliminar el propietario.", "Error");
+            }
+        }
+
         private void GuardarPropietario(bool modificar)
         {
             LimpiarErrores();
@@ -51,6 +97,7 @@ namespace VetCare
             if (!MostrarValidacion(txtCorreo, lblErrorCorreo, propietarioLogica.ValidarCorreo(txtCorreo.Text))) return;
 
             int id = 0;
+
             DateTime fechaRegistro = DateTime.Now;
             if (modificar)
             {
@@ -65,6 +112,7 @@ namespace VetCare
                 bool resultado;
                 if (modificar)
                     resultado = propietarioLogica.Modificar(propietario);
+
                 else
                     resultado = propietarioLogica.Guardar(propietario);
 
@@ -77,22 +125,26 @@ namespace VetCare
                     LimpiarCampos();
                     CargarPropietarios();
                 }
+
                 else
                 {
                     MessageBox.Show("No se guardó el propietario. Revisa los datos e inténtalo nuevamente.");
                 }
             }
+
             catch (SqlException ex)
             {
                 if (ex.Number == 2601 || ex.Number == 2627)
                 {
                     MostrarValidacion(txtCedula, lblErrorCedula, "Ya existe un propietario con este documento.");
                 }
+
                 else
                 {
                     MessageBox.Show("No se pudo guardar. Comprueba la conexión con SQL Server.", "Error al guardar");
                 }
             }
+
             catch (Exception)
             {
                 MessageBox.Show("Ocurrió un error inesperado al guardar el propietario.", "Error");
@@ -108,6 +160,7 @@ namespace VetCare
         {
             if (e.RowIndex < 0) return;
             Propietario? propietario = dgvPropietarios.Rows[e.RowIndex].DataBoundItem as Propietario;
+
             if (propietario == null) return;
 
             LimpiarErrores();
@@ -120,6 +173,7 @@ namespace VetCare
             txtCorreo.Text = propietario.Correo;
             btnGuardar.Enabled = false;
             btnModificar.Enabled = true;
+            btnEliminar.Enabled = true;
         }
 
         private void CargarPropietarios()
@@ -139,9 +193,13 @@ namespace VetCare
                     }
                 }
             }
+
             catch (Exception)
             {
-                MessageBox.Show("No se pudo cargar la lista de propietarios. Comprueba la conexión con SQL Server.", "Consulta de propietarios");
+                MessageBox.Show(
+                    "No se pudo cargar la lista de propietarios. Comprueba la conexión con SQL Server.", 
+                    "Consulta de propietarios"
+                    );
             }
         }
 
@@ -154,6 +212,7 @@ namespace VetCare
                 control.Focus();
                 return false;
             }
+
             return true;
         }
 
@@ -167,6 +226,7 @@ namespace VetCare
             idPropietarioSeleccionado = 0;
             btnGuardar.Enabled = true;
             btnModificar.Enabled = false;
+            btnEliminar.Enabled = false;
             dgvPropietarios.ClearSelection();
             LimpiarErrores();
             txtCedula.Clear();

@@ -100,6 +100,12 @@ namespace VetCare.UI.Logica
             return propietarioDatos.Guardar(propietario);
         }
 
+        public bool Eliminar(int idPropietario)
+        {
+            if (idPropietario <= 0) return false;
+            return propietarioDatos.Eliminar(idPropietario);
+        }
+
         public bool Modificar(Propietario propietario)
         {
             if (propietario.IdPropietario <= 0 || !EsValido(propietario)) return false;
