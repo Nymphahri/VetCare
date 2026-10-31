@@ -12,6 +12,11 @@ namespace VetCare.UI.Logica
             return propietarioDatos.Listar();
         }
 
+        public List<Propietario> Buscar(string texto)
+        {
+            return propietarioDatos.Buscar(texto.Trim());
+        }
+
         public string ValidarTexto(string valor, string campo, int longitudMaxima)
         {
             if (string.IsNullOrWhiteSpace(valor))

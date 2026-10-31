@@ -176,11 +176,21 @@ namespace VetCare
             btnEliminar.Enabled = true;
         }
 
+        private void btnBuscar_Click(object? sender, EventArgs e)
+        {
+            CargarPropietarios();
+            txtBuscar.Focus();
+        }
+
         private void CargarPropietarios()
         {
             try
             {
-                dgvPropietarios.DataSource = propietarioLogica.Listar();
+                txtBuscar.Text = txtBuscar.Text.Trim();
+                if (txtBuscar.Text == "")
+                    dgvPropietarios.DataSource = propietarioLogica.Listar();
+                else
+                    dgvPropietarios.DataSource = propietarioLogica.Buscar(txtBuscar.Text);
                 foreach (DataGridViewColumn columna in dgvPropietarios.Columns)
                 {
                     switch (columna.Name)
@@ -192,6 +202,8 @@ namespace VetCare
                         case "NombreCompleto": columna.Visible = false; break;
                     }
                 }
+                LimpiarCampos();
+                lblResultadoBusqueda.Text = dgvPropietarios.Rows.Count + " propietario(s) encontrado(s).";
             }
 
             catch (Exception)
@@ -219,6 +231,8 @@ namespace VetCare
         private void btnLimpiar_Click(object? sender, EventArgs e)
         {
             LimpiarCampos();
+            txtBuscar.Clear();
+            CargarPropietarios();
         }
 
         private void LimpiarCampos()

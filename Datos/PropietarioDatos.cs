@@ -10,11 +10,19 @@ namespace VetCare.UI.Datos
 
         public List<Propietario> Listar()
         {
+            return Buscar("");
+        }
+
+        public List<Propietario> Buscar(string texto)
+        {
             List<Propietario> propietarios = new List<Propietario>();
             string consulta = "SELECT IdPropietario, Cedula, Nombre, Apellidos, Telefono, Correo, FechaRegistro " +
-                "FROM Propietario ORDER BY IdPropietario DESC";
+                "FROM Propietario WHERE @Busqueda = '' OR " +
+                "CHARINDEX(@Busqueda, Cedula) > 0 OR CHARINDEX(@Busqueda, Nombre) > 0 OR " +
+                "CHARINDEX(@Busqueda, Apellidos) > 0 ORDER BY IdPropietario DESC";
             using SqlConnection conexionSql = conexion.ObtenerConexion();
             using SqlCommand comando = new SqlCommand(consulta, conexionSql);
+            comando.Parameters.Add("@Busqueda", System.Data.SqlDbType.VarChar, 80).Value = texto;
             conexionSql.Open();
             using SqlDataReader lector = comando.ExecuteReader();
             while (lector.Read())
