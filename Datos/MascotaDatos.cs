@@ -9,12 +9,21 @@ namespace VetCare.UI.Datos
 
         public List<Mascota> Listar()
         {
+            return Buscar("");
+        }
+
+        public List<Mascota> Buscar(string texto)
+        {
             List<Mascota> mascotas = new List<Mascota>();
             string consulta = "SELECT IdMascota, IdPropietario, Nombre, Especie, Raza, " +
-                "FechaNacimiento, FechaRegistro FROM Mascota ORDER BY IdMascota DESC";
+                "FechaNacimiento, FechaRegistro FROM Mascota " +
+                "WHERE @Busqueda = '' OR CHARINDEX(@Busqueda, Nombre) > 0 OR " +
+                "CHARINDEX(@Busqueda, Especie) > 0 OR CHARINDEX(@Busqueda, Raza) > 0 " +
+                "ORDER BY IdMascota DESC";
 
             using SqlConnection conexionSql = conexion.ObtenerConexion();
             using SqlCommand comando = new SqlCommand(consulta, conexionSql);
+            comando.Parameters.Add("@Busqueda", System.Data.SqlDbType.VarChar, 50).Value = texto;
             conexionSql.Open();
             using SqlDataReader lector = comando.ExecuteReader();
 

@@ -23,6 +23,10 @@ namespace VetCare
             btnCerrar = new Guna.UI2.WinForms.Guna2GradientButton();
             btnModificar = new Guna.UI2.WinForms.Guna2GradientButton();
             btnEliminar = new Guna.UI2.WinForms.Guna2GradientButton();
+            txtBuscar = new Guna.UI2.WinForms.Guna2TextBox();
+            btnBuscar = new Guna.UI2.WinForms.Guna2GradientButton();
+            lblBuscar = new Label();
+            lblResultadoBusqueda = new Label();
             dgvMascotas = new Guna.UI2.WinForms.Guna2DataGridView();
             lblPropietario = new Label();
             lblCedulaPropietario = new Label();
@@ -151,8 +155,28 @@ namespace VetCare
             btnEliminar.Enabled = false;
             btnEliminar.Click += btnEliminar_Click;
 
+            lblBuscar.Name = "lblBuscar";
+            lblBuscar.Text = "Buscar por nombre, especie o raza:";
+            lblBuscar.AutoSize = true;
+            lblBuscar.Location = new Point(25, 420);
+            txtBuscar.Name = "txtBuscar";
+            txtBuscar.Location = new Point(25, 445);
+            txtBuscar.Size = new Size(400, 36);
+            txtBuscar.MaxLength = 50;
+            txtBuscar.TabIndex = 10;
+            btnBuscar.Name = "btnBuscar";
+            btnBuscar.Text = "Buscar";
+            btnBuscar.ForeColor = Color.White;
+            btnBuscar.Location = new Point(445, 445);
+            btnBuscar.Size = new Size(140, 36);
+            btnBuscar.TabIndex = 11;
+            btnBuscar.Click += btnBuscar_Click;
+            lblResultadoBusqueda.Name = "lblResultadoBusqueda";
+            lblResultadoBusqueda.AutoSize = true;
+            lblResultadoBusqueda.Location = new Point(610, 455);
+
             dgvMascotas.Name = "dgvMascotas";
-            dgvMascotas.Location = new Point(25, 435);
+            dgvMascotas.Location = new Point(25, 500);
             dgvMascotas.Size = new Size(1050, 220);
             dgvMascotas.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvMascotas.ReadOnly = true;
@@ -163,13 +187,13 @@ namespace VetCare
             dgvMascotas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvMascotas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dgvMascotas.ColumnHeadersHeight = 30;
-            dgvMascotas.TabIndex = 10;
+            dgvMascotas.TabIndex = 12;
             dgvMascotas.CellClick += dgvMascotas_CellClick;
             errorProvider.ContainerControl = this;
 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1100, 680);
+            ClientSize = new Size(1100, 745);
             StartPosition = FormStartPosition.CenterParent;
             Text = "VetCare - Mascotas";
             Name = "FrmMascotas";
@@ -195,6 +219,10 @@ namespace VetCare
             Controls.Add(btnModificar);
             Controls.Add(btnEliminar);
             Controls.Add(dgvMascotas);
+            Controls.Add(lblBuscar);
+            Controls.Add(txtBuscar);
+            Controls.Add(btnBuscar);
+            Controls.Add(lblResultadoBusqueda);
             Load += FrmMascotas_Load;
             ((System.ComponentModel.ISupportInitialize)dgvMascotas).EndInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider).EndInit();
@@ -212,6 +240,10 @@ namespace VetCare
         private Guna.UI2.WinForms.Guna2GradientButton btnCerrar;
         private Guna.UI2.WinForms.Guna2GradientButton btnModificar;
         private Guna.UI2.WinForms.Guna2GradientButton btnEliminar;
+        private Guna.UI2.WinForms.Guna2TextBox txtBuscar;
+        private Guna.UI2.WinForms.Guna2GradientButton btnBuscar;
+        private Label lblBuscar;
+        private Label lblResultadoBusqueda;
         private Guna.UI2.WinForms.Guna2DataGridView dgvMascotas;
         private Label lblPropietario;
         private Label lblCedulaPropietario;

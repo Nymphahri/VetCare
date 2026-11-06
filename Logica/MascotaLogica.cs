@@ -12,6 +12,11 @@ namespace VetCare.UI.Logica
             return mascotaDatos.Listar();
         }
 
+        public List<Mascota> Buscar(string texto)
+        {
+            return mascotaDatos.Buscar(texto.Trim());
+        }
+
         public string ValidarPropietario(int idPropietario)
         {
             if (idPropietario <= 0) return "Selecciona un propietario registrado.";

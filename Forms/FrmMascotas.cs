@@ -191,11 +191,21 @@ namespace VetCare
             btnEliminar.Enabled = true;
         }
 
+        private void btnBuscar_Click(object? sender, EventArgs e)
+        {
+            CargarMascotas();
+            txtBuscar.Focus();
+        }
+
         private void CargarMascotas()
         {
             try
             {
-                dgvMascotas.DataSource = mascotaLogica.Listar();
+                txtBuscar.Text = txtBuscar.Text.Trim();
+                if (txtBuscar.Text == "")
+                    dgvMascotas.DataSource = mascotaLogica.Listar();
+                else
+                    dgvMascotas.DataSource = mascotaLogica.Buscar(txtBuscar.Text);
                 foreach (DataGridViewColumn columna in dgvMascotas.Columns)
                 {
                     switch (columna.Name)
@@ -210,7 +220,8 @@ namespace VetCare
                         case "Edad": columna.HeaderText = "Edad (años cumplidos)"; break;
                     }
                 }
-                dgvMascotas.ClearSelection();
+                LimpiarCampos();
+                lblResultadoBusqueda.Text = dgvMascotas.Rows.Count + " mascota(s) encontrada(s).";
             }
             catch (Exception)
             {
@@ -259,6 +270,8 @@ namespace VetCare
         private void btnLimpiar_Click(object? sender, EventArgs e)
         {
             LimpiarCampos();
+            txtBuscar.Clear();
+            CargarMascotas();
         }
 
         private void btnCerrar_Click(object? sender, EventArgs e)
