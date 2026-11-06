@@ -60,6 +60,7 @@
             btnEliminar = new Guna.UI2.WinForms.Guna2GradientButton();
             txtBuscar = new Guna.UI2.WinForms.Guna2TextBox();
             btnBuscar = new Guna.UI2.WinForms.Guna2GradientButton();
+            btnMascotas = new Guna.UI2.WinForms.Guna2GradientButton();
             lblBuscar = new Label();
             lblResultadoBusqueda = new Label();
             lblNombre = new Label();
@@ -358,6 +359,15 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1184, 760);
+            btnMascotas.Name = "btnMascotas";
+            btnMascotas.Text = "Mascotas";
+            btnMascotas.Font = new Font("Segoe UI", 9F);
+            btnMascotas.ForeColor = Color.White;
+            btnMascotas.Location = new Point(977, 393);
+            btnMascotas.Size = new Size(180, 45);
+            btnMascotas.TabIndex = 12;
+            btnMascotas.Click += btnMascotas_Click;
+            Controls.Add(btnMascotas);
             lblBuscar.Name = "lblBuscar";
             lblBuscar.Text = "Buscar por cédula, nombre o apellidos:";
             lblBuscar.AutoSize = true;
@@ -426,6 +436,7 @@
         private Guna.UI2.WinForms.Guna2GradientButton btnEliminar;
         private Guna.UI2.WinForms.Guna2TextBox txtBuscar;
         private Guna.UI2.WinForms.Guna2GradientButton btnBuscar;
+        private Guna.UI2.WinForms.Guna2GradientButton btnMascotas;
         private Label lblBuscar;
         private Label lblResultadoBusqueda;
         private Label lblCorreo;
