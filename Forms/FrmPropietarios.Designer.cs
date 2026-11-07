@@ -61,6 +61,7 @@
             txtBuscar = new Guna.UI2.WinForms.Guna2TextBox();
             btnBuscar = new Guna.UI2.WinForms.Guna2GradientButton();
             btnMascotas = new Guna.UI2.WinForms.Guna2GradientButton();
+            btnVeterinarios = new Guna.UI2.WinForms.Guna2GradientButton();
             lblBuscar = new Label();
             lblResultadoBusqueda = new Label();
             lblNombre = new Label();
@@ -368,6 +369,15 @@
             btnMascotas.TabIndex = 12;
             btnMascotas.Click += btnMascotas_Click;
             Controls.Add(btnMascotas);
+            btnVeterinarios.Name = "btnVeterinarios";
+            btnVeterinarios.Text = "Veterinarios";
+            btnVeterinarios.Font = new Font("Segoe UI", 9F);
+            btnVeterinarios.ForeColor = Color.White;
+            btnVeterinarios.Location = new Point(977, 20);
+            btnVeterinarios.Size = new Size(180, 45);
+            btnVeterinarios.TabIndex = 13;
+            btnVeterinarios.Click += btnVeterinarios_Click;
+            Controls.Add(btnVeterinarios);
             lblBuscar.Name = "lblBuscar";
             lblBuscar.Text = "Buscar por cédula, nombre o apellidos:";
             lblBuscar.AutoSize = true;
@@ -437,6 +447,7 @@
         private Guna.UI2.WinForms.Guna2TextBox txtBuscar;
         private Guna.UI2.WinForms.Guna2GradientButton btnBuscar;
         private Guna.UI2.WinForms.Guna2GradientButton btnMascotas;
+        private Guna.UI2.WinForms.Guna2GradientButton btnVeterinarios;
         private Label lblBuscar;
         private Label lblResultadoBusqueda;
         private Label lblCorreo;
