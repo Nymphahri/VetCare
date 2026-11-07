@@ -20,6 +20,12 @@ namespace VetCare
             txtCorreo.MaxLength = 100;
         }
 
+        private void btnServicios_Click(object? sender, EventArgs e)
+        {
+            using FrmServicios formulario = new FrmServicios();
+            formulario.ShowDialog(this);
+        }
+
         private void btnVeterinarios_Click(object? sender, EventArgs e)
         {
             using FrmVeterinarios formulario = new FrmVeterinarios();
