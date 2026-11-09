@@ -21,11 +21,20 @@ namespace VetCare
             CargarServicios();
         }
 
+        private void btnBuscar_Click(object? sender, EventArgs e)
+        {
+            CargarServicios();
+            txtBuscar.Focus();
+        }
+
         private void CargarServicios()
         {
             try
             {
-                dgvServicios.DataSource = servicioLogica.Listar();
+                if (string.IsNullOrWhiteSpace(txtBuscar.Text))
+                    dgvServicios.DataSource = servicioLogica.Listar();
+                else
+                    dgvServicios.DataSource = servicioLogica.Buscar(txtBuscar.Text);
                 foreach (DataGridViewColumn columna in dgvServicios.Columns)
                 {
                     switch (columna.Name)
@@ -36,7 +45,8 @@ namespace VetCare
                         case "Precio": columna.DefaultCellStyle.Format = "N2"; break;
                     }
                 }
-                dgvServicios.ClearSelection();
+                LimpiarCampos();
+                lblResultados.Text = "Resultados: " + dgvServicios.Rows.Count;
             }
             catch (SqlException)
             {
@@ -147,6 +157,8 @@ namespace VetCare
         private void btnLimpiar_Click(object? sender, EventArgs e)
         {
             LimpiarCampos();
+            txtBuscar.Clear();
+            CargarServicios();
         }
 
         private void btnCerrar_Click(object? sender, EventArgs e)

@@ -19,6 +19,11 @@ namespace VetCare.UI.Logica
             return "";
         }
 
+        public List<Servicio> Buscar(string texto)
+        {
+            return servicioDatos.Buscar(texto.Trim());
+        }
+
         public string ValidarDescripcion(string descripcion)
         {
             if (descripcion.Length > 200) return "La descripción admite máximo 200 caracteres.";

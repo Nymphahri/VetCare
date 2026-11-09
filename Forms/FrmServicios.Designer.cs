@@ -28,6 +28,10 @@ namespace VetCare
             btnLimpiar = new Guna.UI2.WinForms.Guna2GradientButton();
             btnCerrar = new Guna.UI2.WinForms.Guna2GradientButton();
             btnModificar = new Guna.UI2.WinForms.Guna2GradientButton();
+            txtBuscar = new Guna.UI2.WinForms.Guna2TextBox();
+            btnBuscar = new Guna.UI2.WinForms.Guna2GradientButton();
+            lblBuscar = new Label();
+            lblResultados = new Label();
             dgvServicios = new Guna.UI2.WinForms.Guna2DataGridView();
             errorProvider = new ErrorProvider(components);
             ((System.ComponentModel.ISupportInitialize)dgvServicios).BeginInit();
@@ -125,8 +129,28 @@ namespace VetCare
             btnModificar.Enabled = false;
             btnModificar.Click += btnModificar_Click;
 
+            lblBuscar.Name = "lblBuscar";
+            lblBuscar.Text = "Buscar por nombre o descripción:";
+            lblBuscar.AutoSize = true;
+            lblBuscar.Location = new Point(25, 390);
+            txtBuscar.Name = "txtBuscar";
+            txtBuscar.Location = new Point(25, 415);
+            txtBuscar.Size = new Size(400, 36);
+            txtBuscar.MaxLength = 200;
+            txtBuscar.TabIndex = 8;
+            btnBuscar.Name = "btnBuscar";
+            btnBuscar.Text = "Buscar";
+            btnBuscar.ForeColor = Color.White;
+            btnBuscar.Location = new Point(445, 415);
+            btnBuscar.Size = new Size(140, 36);
+            btnBuscar.TabIndex = 9;
+            btnBuscar.Click += btnBuscar_Click;
+            lblResultados.Name = "lblResultados";
+            lblResultados.AutoSize = true;
+            lblResultados.Location = new Point(610, 425);
+
             dgvServicios.Name = "dgvServicios";
-            dgvServicios.Location = new Point(25, 405);
+            dgvServicios.Location = new Point(25, 470);
             dgvServicios.Size = new Size(850, 220);
             dgvServicios.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvServicios.ReadOnly = true;
@@ -135,12 +159,16 @@ namespace VetCare
             dgvServicios.RowHeadersVisible = false;
             dgvServicios.ColumnHeadersHeight = 30;
             dgvServicios.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            dgvServicios.TabIndex = 8;
+            dgvServicios.TabIndex = 10;
             dgvServicios.CellClick += dgvServicios_CellClick;
             errorProvider.ContainerControl = this;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(900, 650);
+            ClientSize = new Size(900, 715);
+            Controls.Add(lblBuscar);
+            Controls.Add(txtBuscar);
+            Controls.Add(btnBuscar);
+            Controls.Add(lblResultados);
             StartPosition = FormStartPosition.CenterParent;
             Name = "FrmServicios";
             Text = "VetCare - Servicios";
@@ -181,6 +209,10 @@ namespace VetCare
         private Guna.UI2.WinForms.Guna2GradientButton btnLimpiar;
         private Guna.UI2.WinForms.Guna2GradientButton btnCerrar;
         private Guna.UI2.WinForms.Guna2GradientButton btnModificar;
+        private Guna.UI2.WinForms.Guna2TextBox txtBuscar;
+        private Guna.UI2.WinForms.Guna2GradientButton btnBuscar;
+        private Label lblBuscar;
+        private Label lblResultados;
         private Guna.UI2.WinForms.Guna2DataGridView dgvServicios;
         private ErrorProvider errorProvider;
     }
