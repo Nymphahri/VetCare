@@ -11,7 +11,9 @@ namespace VetCare
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new FrmPropietarios());
+            using FrmLogin login = new FrmLogin();
+            if (login.ShowDialog() == DialogResult.OK && login.UsuarioAutenticado != null)
+                Application.Run(new FrmPropietarios(login.UsuarioAutenticado));
         }
     }
 }

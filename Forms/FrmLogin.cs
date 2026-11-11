@@ -1,0 +1,54 @@
+using Microsoft.Data.SqlClient;
+using VetCare.UI.Logica;
+using VetCare.UI.Modelos;
+
+namespace VetCare
+{
+    public partial class FrmLogin : Form
+    {
+        private UsuarioLogica usuarioLogica = new UsuarioLogica();
+        public Usuario? UsuarioAutenticado { get; private set; }
+
+        public FrmLogin()
+        {
+            InitializeComponent();
+        }
+
+        private void MostrarError(Control campo, string mensaje)
+        {
+            errorProvider.SetError(campo, mensaje);
+            lblError.Location = new Point(campo.Right + 24, campo.Top);
+            lblError.Text = mensaje;
+            campo.Focus();
+        }
+
+        private void btnIngresar_Click(object? sender, EventArgs e)
+        {
+            errorProvider.Clear();
+            lblError.Text = "";
+            if (string.IsNullOrWhiteSpace(txtUsuario.Text))
+            {
+                MostrarError(txtUsuario, "Escribe tu nombre de usuario.");
+                return;
+            }
+            if (txtContrasena.Text.Length == 0)
+            {
+                MostrarError(txtContrasena, "Escribe tu contraseña.");
+                return;
+            }
+            try
+            {
+                UsuarioAutenticado = usuarioLogica.IniciarSesion(txtUsuario.Text, txtContrasena.Text);
+                txtContrasena.Clear();
+                if (UsuarioAutenticado == null)
+                    MostrarError(txtContrasena, "Usuario o contraseña incorrectos.");
+                else
+                    DialogResult = DialogResult.OK;
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show("No se pudo conectar con VetCareDB. Revisa la conexión e intenta de nuevo.", "Inicio de sesión");
+            }
+        }
+    }
+}

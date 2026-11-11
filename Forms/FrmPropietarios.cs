@@ -10,9 +10,13 @@ namespace VetCare
         private int idPropietarioSeleccionado = 0;
         private DateTime fechaRegistroSeleccionada;
 
-        public FrmPropietarios()
+        public FrmPropietarios(Usuario usuario)
         {
             InitializeComponent();
+            Text = $"VetCare - Propietarios | {usuario.NombreUsuario} ({usuario.Rol})";
+            bool esAdministrador = usuario.Rol == "Administrador";
+            btnServicios.Enabled = esAdministrador;
+            btnVeterinarios.Enabled = esAdministrador;
             txtCedula.MaxLength = 20;
             txtNombre.MaxLength = 50;
             txtApellidos.MaxLength = 80;
