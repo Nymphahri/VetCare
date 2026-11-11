@@ -67,12 +67,47 @@ namespace VetCare
         {
             btnCancelar.Enabled = false;
             btnConfirmar.Enabled = false;
+            btnServicios.Enabled = false;
+            btnAtender.Enabled = false;
             if (dgvCitas.SelectedRows.Count == 0) return;
             Cita? cita = dgvCitas.SelectedRows[0].DataBoundItem as Cita;
             if (cita != null)
             {
+                btnServicios.Enabled = true;
                 btnConfirmar.Enabled = cita.Estado == "Pendiente";
                 btnCancelar.Enabled = cita.Estado == "Pendiente" || cita.Estado == "Confirmada";
+                btnAtender.Enabled = cita.Estado == "Pendiente" || cita.Estado == "Confirmada";
+            }
+        }
+
+        private void btnServicios_Click(object? sender, EventArgs e)
+        {
+            if (dgvCitas.SelectedRows.Count == 0) return;
+            if (dgvCitas.SelectedRows[0].DataBoundItem is Cita cita)
+            {
+                using FrmDetalleCita formulario = new FrmDetalleCita(cita);
+                formulario.ShowDialog(this);
+            }
+        }
+
+        private void btnAtender_Click(object? sender, EventArgs e)
+        {
+            if (dgvCitas.SelectedRows.Count == 0) return;
+            if (dgvCitas.SelectedRows[0].DataBoundItem is not Cita cita) return;
+            DialogResult respuesta = MessageBox.Show(
+                $"¿Marcar como atendida la cita {cita.IdCita} del {cita.FechaHora:dd/MM/yyyy HH:mm}?",
+                "Atender cita", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+            if (respuesta != DialogResult.Yes) return;
+
+            try
+            {
+                if (!citaLogica.Atender(cita.IdCita))
+                    MessageBox.Show("La cita ya no está disponible para atender. Se actualizará la agenda.");
+                CargarCitas();
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show("No se pudo marcar la cita como atendida.", "Agenda");
             }
         }
 

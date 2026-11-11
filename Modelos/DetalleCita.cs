@@ -6,6 +6,7 @@ namespace VetCare.UI.Modelos
         public int IdDetalle { get; set; }
         public int IdCita { get; set; }
         public int IdServicio { get; set; }
+        public string NombreServicio { get; set; } = "";
         public int Cantidad { get; set; }
         public decimal PrecioAplicado { get; set; }
 

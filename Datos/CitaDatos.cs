@@ -38,6 +38,17 @@ namespace VetCare.UI.Datos
             return comando.ExecuteNonQuery() == 1;
         }
 
+        public bool Atender(int idCita)
+        {
+            string consulta = "UPDATE Cita SET Estado = 'Atendida' WHERE IdCita = @IdCita " +
+                "AND Estado IN ('Pendiente', 'Confirmada')";
+            using SqlConnection conexionSql = conexion.ObtenerConexion();
+            using SqlCommand comando = new SqlCommand(consulta, conexionSql);
+            comando.Parameters.Add("@IdCita", SqlDbType.Int).Value = idCita;
+            conexionSql.Open();
+            return comando.ExecuteNonQuery() == 1;
+        }
+
         public bool Cancelar(int idCita)
         {
             string consulta = "UPDATE Cita SET Estado = 'Cancelada' WHERE IdCita = @IdCita " +

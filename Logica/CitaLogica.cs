@@ -18,6 +18,12 @@ namespace VetCare.UI.Logica
             return citaDatos.Confirmar(idCita);
         }
 
+        public bool Atender(int idCita)
+        {
+            if (idCita <= 0) return false;
+            return citaDatos.Atender(idCita);
+        }
+
         public bool Cancelar(int idCita)
         {
             if (idCita <= 0) return false;

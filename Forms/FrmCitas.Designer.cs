@@ -27,6 +27,8 @@ namespace VetCare
             dgvCitas = new Guna.UI2.WinForms.Guna2DataGridView();
             btnCancelar = new Guna.UI2.WinForms.Guna2GradientButton();
             btnConfirmar = new Guna.UI2.WinForms.Guna2GradientButton();
+            btnServicios = new Guna.UI2.WinForms.Guna2GradientButton();
+            btnAtender = new Guna.UI2.WinForms.Guna2GradientButton();
             SuspendLayout();
             lblMascota.Name = "lblMascota";
             lblMascota.Location = new Point(25, 15);
@@ -78,7 +80,7 @@ namespace VetCare
             btnAgendar.Name = "btnAgendar";
             btnAgendar.Location = new Point(25, 412);
             btnAgendar.Text = "Agendar";
-            btnAgendar.Size = new Size(180, 42);
+            btnAgendar.Size = new Size(132, 42);
             btnAgendar.Click += btnAgendar_Click;
             btnAgendar.TabIndex = 4;
 
@@ -92,17 +94,17 @@ namespace VetCare
             ClientSize = new Size(820, 695);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Text = "Cancelar cita";
-            btnCancelar.Location = new Point(225, 412);
-            btnCancelar.Size = new Size(180, 42);
+            btnCancelar.Location = new Point(465, 412);
+            btnCancelar.Size = new Size(140, 42);
             btnCancelar.Enabled = false;
-            btnCancelar.TabIndex = 5;
+            btnCancelar.TabIndex = 7;
             btnCancelar.Click += btnCancelar_Click;
             btnConfirmar.Name = "btnConfirmar";
             btnConfirmar.Text = "Confirmar cita";
-            btnConfirmar.Location = new Point(425, 412);
-            btnConfirmar.Size = new Size(180, 42);
+            btnConfirmar.Location = new Point(167, 412);
+            btnConfirmar.Size = new Size(143, 42);
             btnConfirmar.Enabled = false;
-            btnConfirmar.TabIndex = 6;
+            btnConfirmar.TabIndex = 5;
             btnConfirmar.Click += btnConfirmar_Click;
             dgvCitas.Name = "dgvCitas";
             dgvCitas.Location = new Point(25, 475);
@@ -115,10 +117,26 @@ namespace VetCare
             dgvCitas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvCitas.ColumnHeadersHeight = 30;
             dgvCitas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            dgvCitas.TabIndex = 7;
+            dgvCitas.TabIndex = 9;
             dgvCitas.SelectionChanged += dgvCitas_SelectionChanged;
             Controls.Add(btnCancelar);
             Controls.Add(btnConfirmar);
+            btnAtender.Name = "btnAtender";
+            btnAtender.Text = "Atender cita";
+            btnAtender.Location = new Point(320, 412);
+            btnAtender.Size = new Size(135, 42);
+            btnAtender.Enabled = false;
+            btnAtender.TabIndex = 6;
+            btnAtender.Click += btnAtender_Click;
+            Controls.Add(btnAtender);
+            btnServicios.Name = "btnServicios";
+            btnServicios.Text = "Servicios de la cita";
+            btnServicios.Location = new Point(615, 412);
+            btnServicios.Size = new Size(180, 42);
+            btnServicios.Enabled = false;
+            btnServicios.TabIndex = 8;
+            btnServicios.Click += btnServicios_Click;
+            Controls.Add(btnServicios);
             Controls.Add(dgvCitas);
             Text = "VetCare - Agendar cita";
             StartPosition = FormStartPosition.CenterParent;
@@ -150,6 +168,8 @@ namespace VetCare
         private ErrorProvider errorProvider;
         private Guna.UI2.WinForms.Guna2GradientButton btnCancelar;
         private Guna.UI2.WinForms.Guna2GradientButton btnConfirmar;
+        private Guna.UI2.WinForms.Guna2GradientButton btnServicios;
+        private Guna.UI2.WinForms.Guna2GradientButton btnAtender;
         private Guna.UI2.WinForms.Guna2DataGridView dgvCitas;
     }
 }
