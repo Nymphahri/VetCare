@@ -34,11 +34,21 @@ namespace VetCare
             CargarCitas();
         }
 
+        private void FiltrosCita_Changed(object? sender, EventArgs e)
+        {
+            dtpBuscarFecha.Enabled = chkBuscarFecha.Checked;
+            CargarCitas();
+        }
+
         private void CargarCitas()
         {
             try
             {
-                dgvCitas.DataSource = citaLogica.Listar();
+                DateTime? fecha = chkBuscarFecha.Checked ? dtpBuscarFecha.Value.Date : null;
+                string estado = cboBuscarEstado.SelectedIndex > 0 ? cboBuscarEstado.Text : "";
+                List<Cita> citas = citaLogica.Listar(txtBuscarMascota.Text, fecha, estado);
+                dgvCitas.DataSource = citas;
+                lblResultado.Text = citas.Count == 0 ? "Sin citas" : $"Citas: {citas.Count}";
                 foreach (DataGridViewColumn columna in dgvCitas.Columns)
                 {
                     switch (columna.Name)
@@ -59,6 +69,7 @@ namespace VetCare
             catch (SqlException)
             {
                 dgvCitas.DataSource = null;
+                lblResultado.Text = "";
                 MessageBox.Show("No se pudo cargar la lista de citas.", "Agenda");
             }
         }

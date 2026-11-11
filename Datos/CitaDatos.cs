@@ -8,13 +8,20 @@ namespace VetCare.UI.Datos
     {
         private ConexionBD conexion = new ConexionBD();
 
-        public List<Cita> Listar()
+        public List<Cita> Listar(string nombreMascota = "", DateTime? fecha = null, string estado = "")
         {
             List<Cita> citas = new List<Cita>();
-            string consulta = "SELECT IdCita, IdMascota, IdVeterinario, FechaHora, Estado, Motivo " +
-                "FROM Cita ORDER BY FechaHora DESC, IdCita DESC";
+            string consulta = "SELECT c.IdCita, c.IdMascota, c.IdVeterinario, c.FechaHora, c.Estado, c.Motivo " +
+                "FROM Cita c INNER JOIN Mascota m ON m.IdMascota = c.IdMascota " +
+                "WHERE (@Nombre = '' OR CHARINDEX(@Nombre, m.Nombre) > 0) " +
+                "AND (@Fecha IS NULL OR CAST(c.FechaHora AS date) = @Fecha) " +
+                "AND (@Estado = '' OR c.Estado = @Estado) " +
+                "ORDER BY c.FechaHora DESC, c.IdCita DESC";
             using SqlConnection conexionSql = conexion.ObtenerConexion();
             using SqlCommand comando = new SqlCommand(consulta, conexionSql);
+            comando.Parameters.Add("@Nombre", SqlDbType.VarChar, 50).Value = nombreMascota;
+            comando.Parameters.Add("@Fecha", SqlDbType.Date).Value = (object?)fecha ?? DBNull.Value;
+            comando.Parameters.Add("@Estado", SqlDbType.VarChar, 15).Value = estado;
             conexionSql.Open();
             using SqlDataReader lector = comando.ExecuteReader();
             while (lector.Read())

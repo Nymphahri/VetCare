@@ -7,9 +7,9 @@ namespace VetCare.UI.Logica
     {
         private CitaDatos citaDatos = new CitaDatos();
 
-        public List<Cita> Listar()
+        public List<Cita> Listar(string nombreMascota = "", DateTime? fecha = null, string estado = "")
         {
-            return citaDatos.Listar();
+            return citaDatos.Listar(nombreMascota.Trim(), fecha, estado);
         }
 
         public bool Confirmar(int idCita)
