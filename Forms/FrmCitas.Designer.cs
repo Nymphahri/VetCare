@@ -28,6 +28,7 @@ namespace VetCare
             btnCancelar = new Guna.UI2.WinForms.Guna2GradientButton();
             btnConfirmar = new Guna.UI2.WinForms.Guna2GradientButton();
             btnServicios = new Guna.UI2.WinForms.Guna2GradientButton();
+            btnReprogramar = new Guna.UI2.WinForms.Guna2GradientButton();
             lblBuscarMascota = new Label();
             txtBuscarMascota = new Guna.UI2.WinForms.Guna2TextBox();
             lblResultado = new Label();
@@ -72,6 +73,13 @@ namespace VetCare
             dtpFechaHora.Format = DateTimePickerFormat.Custom;
             dtpFechaHora.CustomFormat = "dd/MM/yyyy HH:mm";
             dtpFechaHora.TabIndex = 2;
+            btnReprogramar.Name = "btnReprogramar";
+            btnReprogramar.Text = "Reprogramar cita";
+            btnReprogramar.Location = new Point(625, 274);
+            btnReprogramar.Size = new Size(170, 36);
+            btnReprogramar.Enabled = false;
+            btnReprogramar.Click += btnReprogramar_Click;
+            Controls.Add(btnReprogramar);
 
             lblMotivo.Name = "lblMotivo";
             lblMotivo.Location = new Point(25, 332);
@@ -94,7 +102,7 @@ namespace VetCare
             lblError.Name = "lblError";
             lblError.Location = new Point(365, 39);
             lblError.ForeColor = Color.Firebrick;
-            lblError.Size = new Size(350, 70);
+            lblError.Size = new Size(250, 70);
             errorProvider.ContainerControl = this;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -221,6 +229,7 @@ namespace VetCare
         private Guna.UI2.WinForms.Guna2GradientButton btnCancelar;
         private Guna.UI2.WinForms.Guna2GradientButton btnConfirmar;
         private Guna.UI2.WinForms.Guna2GradientButton btnServicios;
+        private Guna.UI2.WinForms.Guna2GradientButton btnReprogramar;
         private Label lblBuscarMascota;
         private Guna.UI2.WinForms.Guna2TextBox txtBuscarMascota;
         private Label lblResultado;

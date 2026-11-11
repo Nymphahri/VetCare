@@ -30,14 +30,25 @@ namespace VetCare.UI.Logica
             return citaDatos.Cancelar(idCita);
         }
 
+        public static DateTime HorarioAlMinuto(DateTime fechaHora)
+        {
+            return new DateTime(fechaHora.Year, fechaHora.Month, fechaHora.Day,
+                fechaHora.Hour, fechaHora.Minute, 0);
+        }
+
+        public bool Reprogramar(Cita cita, DateTime fechaHora)
+        {
+            if (cita.IdCita <= 0) return false;
+            return citaDatos.Reprogramar(cita, HorarioAlMinuto(fechaHora));
+        }
+
         public bool Agendar(int idMascota, int idVeterinario, DateTime fechaHora, string motivo)
         {
             motivo = motivo.Trim();
             if (idMascota <= 0 || idVeterinario <= 0 || motivo.Length > 200)
                 return false;
 
-            DateTime horario = new DateTime(fechaHora.Year, fechaHora.Month, fechaHora.Day,
-                fechaHora.Hour, fechaHora.Minute, 0);
+            DateTime horario = HorarioAlMinuto(fechaHora);
             Cita cita = new Cita(0, idMascota, idVeterinario, horario, "Pendiente", motivo);
             return citaDatos.Agendar(cita);
         }

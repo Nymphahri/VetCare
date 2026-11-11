@@ -34,6 +34,19 @@ namespace VetCare.UI.Datos
             return citas;
         }
 
+        public bool Reprogramar(Cita cita, DateTime nuevoHorario)
+        {
+            string consulta = "UPDATE Cita SET FechaHora = @NuevoHorario WHERE IdCita = @IdCita " +
+                "AND FechaHora = @HorarioOriginal AND Estado IN ('Pendiente', 'Confirmada')";
+            using SqlConnection conexionSql = conexion.ObtenerConexion();
+            using SqlCommand comando = new SqlCommand(consulta, conexionSql);
+            comando.Parameters.Add("@IdCita", SqlDbType.Int).Value = cita.IdCita;
+            comando.Parameters.Add("@HorarioOriginal", SqlDbType.DateTime).Value = cita.FechaHora;
+            comando.Parameters.Add("@NuevoHorario", SqlDbType.DateTime).Value = nuevoHorario;
+            conexionSql.Open();
+            return comando.ExecuteNonQuery() == 1;
+        }
+
         public bool Confirmar(int idCita)
         {
             string consulta = "UPDATE Cita SET Estado = 'Confirmada' " +
