@@ -1,5 +1,6 @@
 using Microsoft.Data.SqlClient;
 using VetCare.UI.Logica;
+using VetCare.UI.Modelos;
 
 namespace VetCare
 {
@@ -66,11 +67,46 @@ namespace VetCare
             }
         }
 
+        private void dgvUsuarios_SelectionChanged(object? sender, EventArgs e)
+        {
+            cboNuevoRol.Enabled = dgvUsuarios.SelectedRows.Count == 1;
+            if (cboNuevoRol.Enabled && dgvUsuarios.SelectedRows[0].DataBoundItem is Usuario usuario)
+                cboNuevoRol.SelectedItem = usuario.Rol;
+            else
+                cboNuevoRol.SelectedIndex = -1;
+            btnCambiarRol.Enabled = false;
+        }
+
+        private void cboNuevoRol_SelectedIndexChanged(object? sender, EventArgs e)
+        {
+            btnCambiarRol.Enabled = dgvUsuarios.SelectedRows.Count == 1
+                && dgvUsuarios.SelectedRows[0].DataBoundItem is Usuario usuario
+                && cboNuevoRol.SelectedItem is string rol && rol != usuario.Rol;
+        }
+
+        private void btnCambiarRol_Click(object? sender, EventArgs e)
+        {
+            if (dgvUsuarios.SelectedRows.Count != 1 ||
+                dgvUsuarios.SelectedRows[0].DataBoundItem is not Usuario usuario ||
+                cboNuevoRol.SelectedItem is not string rol) return;
+            try
+            {
+                if (!usuarioLogica.CambiarRol(usuario, rol))
+                    MessageBox.Show("La cuenta cambió. Revisa el listado actualizado.", "Usuarios");
+                CargarUsuarios();
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show("No se pudo actualizar el rol. Comprueba la conexión con VetCareDB.", "Usuarios");
+            }
+        }
+
         private void CargarUsuarios()
         {
             try
             {
                 dgvUsuarios.DataSource = usuarioLogica.Listar();
+                dgvUsuarios.ClearSelection();
             }
             catch (SqlException)
             {

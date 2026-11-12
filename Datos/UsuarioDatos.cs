@@ -34,6 +34,19 @@ namespace VetCare.UI.Datos
             return comando.ExecuteNonQuery() == 1;
         }
 
+        public bool CambiarRol(Usuario usuario, string nuevoRol)
+        {
+            const string consulta = "UPDATE dbo.Usuario SET Rol = @NuevoRol " +
+                "WHERE IdUsuario = @IdUsuario AND Rol = @RolOriginal";
+            using SqlConnection conexionSql = conexion.ObtenerConexion();
+            using SqlCommand comando = new SqlCommand(consulta, conexionSql);
+            comando.Parameters.Add("@IdUsuario", SqlDbType.Int).Value = usuario.IdUsuario;
+            comando.Parameters.Add("@RolOriginal", SqlDbType.VarChar, 20).Value = usuario.Rol;
+            comando.Parameters.Add("@NuevoRol", SqlDbType.VarChar, 20).Value = nuevoRol;
+            conexionSql.Open();
+            return comando.ExecuteNonQuery() == 1;
+        }
+
         public Usuario? BuscarPorCredenciales(string nombre, string hash)
         {
             if (nombre.Length > 30 || hash.Length != 64) return null;

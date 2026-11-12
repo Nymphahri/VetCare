@@ -16,6 +16,9 @@ namespace VetCare
         private Guna2ComboBox cboRol;
         private Label lblError;
         private Guna2GradientButton btnRegistrar;
+        private Label lblNuevoRol;
+        private Guna2ComboBox cboNuevoRol;
+        private Guna2GradientButton btnCambiarRol;
 
         protected override void Dispose(bool disposing)
         {
@@ -96,8 +99,36 @@ namespace VetCare
             dgvUsuarios.Columns.Add("colRol", "Rol");
             dgvUsuarios.Columns["colRol"].DataPropertyName = nameof(Usuario.Rol);
             Controls.Add(dgvUsuarios);
+            dgvUsuarios.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvUsuarios.MultiSelect = false;
+            lblNuevoRol = new Label();
+            lblNuevoRol.Text = "Rol de la cuenta seleccionada";
+            lblNuevoRol.AutoSize = true;
+            lblNuevoRol.Location = new Point(20, 487);
+            cboNuevoRol = new Guna2ComboBox();
+            cboNuevoRol.Name = "cboNuevoRol";
+            cboNuevoRol.Location = new Point(20, 510);
+            cboNuevoRol.Size = new Size(220, 36);
+            cboNuevoRol.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboNuevoRol.Items.AddRange(new object[] { "Recepcionista", "Administrador" });
+            cboNuevoRol.Enabled = false;
+            btnCambiarRol = new Guna2GradientButton();
+            btnCambiarRol.Name = "btnCambiarRol";
+            btnCambiarRol.Text = "Guardar cambio de rol";
+            btnCambiarRol.Location = new Point(260, 510);
+            btnCambiarRol.Size = new Size(220, 36);
+            btnCambiarRol.Enabled = false;
+            Controls.Add(lblNuevoRol);
+            Controls.Add(cboNuevoRol);
+            Controls.Add(btnCambiarRol);
+            dgvUsuarios.SelectionChanged += dgvUsuarios_SelectionChanged;
+            cboNuevoRol.SelectedIndexChanged += cboNuevoRol_SelectedIndexChanged;
+            btnCambiarRol.Click += btnCambiarRol_Click;
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(540, 494);
+            ClientSize = new Size(540, 570);
+            lblNuevoRol.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            cboNuevoRol.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnCambiarRol.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             Text = "VetCare - Usuarios";
             StartPosition = FormStartPosition.CenterParent;
             Load += FrmUsuarios_Load;

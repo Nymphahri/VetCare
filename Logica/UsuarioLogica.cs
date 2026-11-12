@@ -28,8 +28,20 @@ namespace VetCare.UI.Logica
             nombre = nombre.Trim();
             if (nombre.Length == 0 || nombre.Length > 30 || string.IsNullOrWhiteSpace(contrasena))
                 return false;
-            if (rol != "Administrador" && rol != "Recepcionista") return false;
+            if (!EsRolValido(rol)) return false;
             return usuarioDatos.Registrar(nombre, CalcularHash(contrasena), rol);
+        }
+
+        public bool CambiarRol(Usuario usuario, string nuevoRol)
+        {
+            if (usuario.IdUsuario <= 0 || !EsRolValido(nuevoRol) || usuario.Rol == nuevoRol)
+                return false;
+            return usuarioDatos.CambiarRol(usuario, nuevoRol);
+        }
+
+        private bool EsRolValido(string rol)
+        {
+            return rol == "Administrador" || rol == "Recepcionista";
         }
 
         private string CalcularHash(string contrasena)
