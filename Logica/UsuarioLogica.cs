@@ -20,9 +20,22 @@ namespace VetCare.UI.Logica
             if (nombre.Length == 0 || nombre.Length > 30 || string.IsNullOrEmpty(contrasena))
                 return null;
 
+            return usuarioDatos.BuscarPorCredenciales(nombre, CalcularHash(contrasena));
+        }
+
+        public bool Registrar(string nombre, string contrasena, string rol)
+        {
+            nombre = nombre.Trim();
+            if (nombre.Length == 0 || nombre.Length > 30 || string.IsNullOrWhiteSpace(contrasena))
+                return false;
+            if (rol != "Administrador" && rol != "Recepcionista") return false;
+            return usuarioDatos.Registrar(nombre, CalcularHash(contrasena), rol);
+        }
+
+        private string CalcularHash(string contrasena)
+        {
             byte[] caracteres = Encoding.UTF8.GetBytes(contrasena);
-            string hash = Convert.ToHexString(SHA256.HashData(caracteres));
-            return usuarioDatos.BuscarPorCredenciales(nombre, hash);
+            return Convert.ToHexString(SHA256.HashData(caracteres));
         }
     }
 }

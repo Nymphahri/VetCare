@@ -21,6 +21,19 @@ namespace VetCare.UI.Datos
             return usuarios;
         }
 
+        public bool Registrar(string nombre, string hash, string rol)
+        {
+            const string consulta = "INSERT INTO dbo.Usuario (NombreUsuario, ContrasenaHash, Rol) " +
+                "VALUES (@Nombre, @Hash, @Rol)";
+            using SqlConnection conexionSql = conexion.ObtenerConexion();
+            using SqlCommand comando = new SqlCommand(consulta, conexionSql);
+            comando.Parameters.Add("@Nombre", SqlDbType.VarChar, 30).Value = nombre;
+            comando.Parameters.Add("@Hash", SqlDbType.VarChar, 64).Value = hash;
+            comando.Parameters.Add("@Rol", SqlDbType.VarChar, 20).Value = rol;
+            conexionSql.Open();
+            return comando.ExecuteNonQuery() == 1;
+        }
+
         public Usuario? BuscarPorCredenciales(string nombre, string hash)
         {
             if (nombre.Length > 30 || hash.Length != 64) return null;
