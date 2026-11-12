@@ -10,42 +10,14 @@ namespace VetCare
         private int idPropietarioSeleccionado = 0;
         private DateTime fechaRegistroSeleccionada;
 
-        public FrmPropietarios(Usuario usuario)
+        public FrmPropietarios()
         {
             InitializeComponent();
-            Text = $"VetCare - Propietarios | {usuario.NombreUsuario} ({usuario.Rol})";
-            bool esAdministrador = usuario.Rol == "Administrador";
-            btnServicios.Enabled = esAdministrador;
-            btnVeterinarios.Enabled = esAdministrador;
             txtCedula.MaxLength = 20;
             txtNombre.MaxLength = 50;
             txtApellidos.MaxLength = 80;
             txtTelefono.MaxLength = 20;
             txtCorreo.MaxLength = 100;
-        }
-
-        private void btnCitas_Click(object? sender, EventArgs e)
-        {
-            using FrmCitas formulario = new FrmCitas();
-            formulario.ShowDialog(this);
-        }
-
-        private void btnServicios_Click(object? sender, EventArgs e)
-        {
-            using FrmServicios formulario = new FrmServicios();
-            formulario.ShowDialog(this);
-        }
-
-        private void btnVeterinarios_Click(object? sender, EventArgs e)
-        {
-            using FrmVeterinarios formulario = new FrmVeterinarios();
-            formulario.ShowDialog(this);
-        }
-
-        private void btnMascotas_Click(object? sender, EventArgs e)
-        {
-            using FrmMascotas formulario = new FrmMascotas();
-            formulario.ShowDialog(this);
         }
 
         private void btnGuardar_Click(object? sender, EventArgs e)
