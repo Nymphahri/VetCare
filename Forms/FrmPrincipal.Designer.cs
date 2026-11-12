@@ -10,6 +10,7 @@ namespace VetCare
         private Guna2GradientButton btnCitas;
         private Guna2GradientButton btnVeterinarios;
         private Guna2GradientButton btnServicios;
+        private Guna2GradientButton btnUsuarios;
 
         private void InitializeComponent()
         {
@@ -19,6 +20,7 @@ namespace VetCare
             btnCitas = new Guna2GradientButton();
             btnVeterinarios = new Guna2GradientButton();
             btnServicios = new Guna2GradientButton();
+            btnUsuarios = new Guna2GradientButton();
             SuspendLayout();
             lblSesion.Name = "lblSesion";
             lblSesion.Location = new Point(24, 18);
@@ -64,8 +66,15 @@ namespace VetCare
             btnServicios.TabIndex = 4;
             btnServicios.Click += btnServicios_Click;
             Controls.Add(btnServicios);
+            btnUsuarios.Name = "btnUsuarios";
+            btnUsuarios.Text = "Usuarios";
+            btnUsuarios.Location = new Point(24, 302);
+            btnUsuarios.Size = new Size(280, 40);
+            btnUsuarios.TabIndex = 5;
+            btnUsuarios.Click += btnUsuarios_Click;
+            Controls.Add(btnUsuarios);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(328, 316);
+            ClientSize = new Size(328, 366);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             StartPosition = FormStartPosition.CenterScreen;

@@ -8,6 +8,19 @@ namespace VetCare.UI.Datos
     {
         private ConexionBD conexion = new ConexionBD();
 
+        public List<Usuario> Listar()
+        {
+            const string consulta = "SELECT IdUsuario, NombreUsuario, Rol FROM dbo.Usuario ORDER BY NombreUsuario";
+            using SqlConnection conexionSql = conexion.ObtenerConexion();
+            using SqlCommand comando = new SqlCommand(consulta, conexionSql);
+            conexionSql.Open();
+            using SqlDataReader lector = comando.ExecuteReader();
+            List<Usuario> usuarios = new List<Usuario>();
+            while (lector.Read())
+                usuarios.Add(new Usuario(lector.GetInt32(0), lector.GetString(1), lector.GetString(2)));
+            return usuarios;
+        }
+
         public Usuario? BuscarPorCredenciales(string nombre, string hash)
         {
             if (nombre.Length > 30 || hash.Length != 64) return null;

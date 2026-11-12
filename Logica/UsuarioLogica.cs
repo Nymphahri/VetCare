@@ -9,6 +9,11 @@ namespace VetCare.UI.Logica
     {
         private UsuarioDatos usuarioDatos = new UsuarioDatos();
 
+        public List<Usuario> Listar()
+        {
+            return usuarioDatos.Listar();
+        }
+
         public Usuario? IniciarSesion(string nombre, string contrasena)
         {
             nombre = nombre.Trim();
