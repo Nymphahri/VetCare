@@ -1,0 +1,155 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" agent="5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36" scale="1" border="0">
+  <diagram id="R2lEEEUBdFMjLlhIrx00" name="ER">
+    <mxGraphModel dx="2009" dy="1117" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="noOLpXe0ZnMtauas5kys-48" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=20;fontStyle=1;" value="Diagrama entidad-relación de VetCareDB" vertex="1">
+          <mxGeometry height="40" width="520" x="10" as="geometry" />
+        </mxCell>
+        <mxCell id="noOLpXe0ZnMtauas5kys-49" parent="1" style="swimlane;fontStyle=1;align=center;startSize=26;horizontal=1;collapsible=0;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Propietario" vertex="1">
+          <mxGeometry height="210" width="200" x="10" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="noOLpXe0ZnMtauas5kys-50" parent="noOLpXe0ZnMtauas5kys-49" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;rounded=0;fontStyle=1;" value="IdPropietario  (PK)" vertex="1">
+          <mxGeometry height="24" width="200" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="noOLpXe0ZnMtauas5kys-51" parent="noOLpXe0ZnMtauas5kys-49" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;rounded=0;" value="Cedula  (UK)" vertex="1">
+          <mxGeometry height="24" width="200" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="noOLpXe0ZnMtauas5kys-52" parent="noOLpXe0ZnMtauas5kys-49" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;rounded=0;" value="Nombre" vertex="1">
+          <mxGeometry height="24" width="200" y="74" as="geometry" />
+        </mxCell>
+        <mxCell id="noOLpXe0ZnMtauas5kys-53" parent="noOLpXe0ZnMtauas5kys-49" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;rounded=0;" value="Apellidos" vertex="1">
+          <mxGeometry height="24" width="200" y="98" as="geometry" />
+        </mxCell>
+        <mxCell id="noOLpXe0ZnMtauas5kys-54" parent="noOLpXe0ZnMtauas5kys-49" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;rounded=0;" value="Telefono" vertex="1">
+          <mxGeometry height="24" width="200" y="122" as="geometry" />
+        </mxCell>
+        <mxCell id="noOLpXe0ZnMtauas5kys-55" parent="noOLpXe0ZnMtauas5kys-49" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;rounded=0;" value="Correo" vertex="1">
+          <mxGeometry height="24" width="200" y="146" as="geometry" />
+        </mxCell>
+        <mxCell id="noOLpXe0ZnMtauas5kys-56" parent="noOLpXe0ZnMtauas5kys-49" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;rounded=0;" value="FechaRegistro" vertex="1">
+          <mxGeometry height="24" width="200" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="noOLpXe0ZnMtauas5kys-57" parent="1" style="swimlane;fontStyle=1;align=center;startSize=26;horizontal=1;collapsible=0;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Mascota" vertex="1">
+          <mxGeometry height="194" width="200" x="10" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="noOLpXe0ZnMtauas5kys-58" parent="noOLpXe0ZnMtauas5kys-57" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;rounded=0;fontStyle=1;" value="IdMascota  (PK)" vertex="1">
+          <mxGeometry height="24" width="200" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="noOLpXe0ZnMtauas5kys-59" parent="noOLpXe0ZnMtauas5kys-57" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;rounded=0;" value="Nombre" vertex="1">
+          <mxGeometry height="24" width="200" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="noOLpXe0ZnMtauas5kys-60" parent="noOLpXe0ZnMtauas5kys-57" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;rounded=0;" value="Especie" vertex="1">
+          <mxGeometry height="24" width="200" y="74" as="geometry" />
+        </mxCell>
+        <mxCell id="noOLpXe0ZnMtauas5kys-61" parent="noOLpXe0ZnMtauas5kys-57" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;rounded=0;" value="Raza" vertex="1">
+          <mxGeometry height="24" width="200" y="98" as="geometry" />
+        </mxCell>
+        <mxCell id="noOLpXe0ZnMtauas5kys-62" parent="noOLpXe0ZnMtauas5kys-57" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;rounded=0;" value="FechaNacimiento" vertex="1">
+          <mxGeometry height="24" width="200" y="122" as="geometry" />
+        </mxCell>
+        <mxCell id="noOLpXe0ZnMtauas5kys-63" parent="noOLpXe0ZnMtauas5kys-57" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;rounded=0;" value="FechaRegistro" vertex="1">
+          <mxGeometry height="24" width="200" y="146" as="geometry" />
+        </mxCell>
+        <mxCell id="noOLpXe0ZnMtauas5kys-64" parent="1" style="swimlane;fontStyle=1;align=center;startSize=26;horizontal=1;collapsible=0;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Veterinario" vertex="1">
+          <mxGeometry height="170" width="200" x="300" y="42" as="geometry" />
+        </mxCell>
+        <mxCell id="noOLpXe0ZnMtauas5kys-65" parent="noOLpXe0ZnMtauas5kys-64" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;rounded=0;fontStyle=1;" value="IdVeterinario  (PK)" vertex="1">
+          <mxGeometry height="24" width="200" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="noOLpXe0ZnMtauas5kys-66" parent="noOLpXe0ZnMtauas5kys-64" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;rounded=0;" value="Nombre" vertex="1">
+          <mxGeometry height="24" width="200" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="noOLpXe0ZnMtauas5kys-67" parent="noOLpXe0ZnMtauas5kys-64" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;rounded=0;" value="Apellidos" vertex="1">
+          <mxGeometry height="24" width="200" y="74" as="geometry" />
+        </mxCell>
+        <mxCell id="noOLpXe0ZnMtauas5kys-68" parent="noOLpXe0ZnMtauas5kys-64" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;rounded=0;" value="Especialidad" vertex="1">
+          <mxGeometry height="24" width="200" y="98" as="geometry" />
+        </mxCell>
+        <mxCell id="noOLpXe0ZnMtauas5kys-69" parent="noOLpXe0ZnMtauas5kys-64" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;rounded=0;" value="Telefono" vertex="1">
+          <mxGeometry height="24" width="200" y="122" as="geometry" />
+        </mxCell>
+        <mxCell id="noOLpXe0ZnMtauas5kys-70" parent="1" style="swimlane;fontStyle=1;align=center;startSize=26;horizontal=1;collapsible=0;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Cita" vertex="1">
+          <mxGeometry height="122" width="200" x="300" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="noOLpXe0ZnMtauas5kys-71" parent="noOLpXe0ZnMtauas5kys-70" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;rounded=0;fontStyle=1;" value="IdCita  (PK)" vertex="1">
+          <mxGeometry height="24" width="200" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="noOLpXe0ZnMtauas5kys-72" parent="noOLpXe0ZnMtauas5kys-70" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;rounded=0;" value="FechaHora" vertex="1">
+          <mxGeometry height="24" width="200" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="noOLpXe0ZnMtauas5kys-73" parent="noOLpXe0ZnMtauas5kys-70" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;rounded=0;" value="Estado" vertex="1">
+          <mxGeometry height="24" width="200" y="74" as="geometry" />
+        </mxCell>
+        <mxCell id="noOLpXe0ZnMtauas5kys-74" parent="noOLpXe0ZnMtauas5kys-70" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;rounded=0;" value="Motivo" vertex="1">
+          <mxGeometry height="24" width="200" y="98" as="geometry" />
+        </mxCell>
+        <mxCell id="noOLpXe0ZnMtauas5kys-75" parent="1" style="swimlane;fontStyle=1;align=center;startSize=26;horizontal=1;collapsible=0;fillColor=#f8cecc;strokeColor=#b85450;" value="DetalleCita" vertex="1">
+          <mxGeometry height="98" width="200" x="680" y="353" as="geometry" />
+        </mxCell>
+        <mxCell id="noOLpXe0ZnMtauas5kys-76" parent="noOLpXe0ZnMtauas5kys-75" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;rounded=0;fontStyle=1;" value="IdDetalle  (PK)" vertex="1">
+          <mxGeometry height="24" width="200" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="noOLpXe0ZnMtauas5kys-77" parent="noOLpXe0ZnMtauas5kys-75" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;rounded=0;" value="Cantidad" vertex="1">
+          <mxGeometry height="24" width="200" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="noOLpXe0ZnMtauas5kys-78" parent="noOLpXe0ZnMtauas5kys-75" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;rounded=0;" value="PrecioAplicado" vertex="1">
+          <mxGeometry height="24" width="200" y="74" as="geometry" />
+        </mxCell>
+        <mxCell id="noOLpXe0ZnMtauas5kys-79" parent="1" style="swimlane;fontStyle=1;align=center;startSize=26;horizontal=1;collapsible=0;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Servicio" vertex="1">
+          <mxGeometry height="146" width="200" x="680" y="42" as="geometry" />
+        </mxCell>
+        <mxCell id="noOLpXe0ZnMtauas5kys-80" parent="noOLpXe0ZnMtauas5kys-79" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;rounded=0;fontStyle=1;" value="IdServicio  (PK)" vertex="1">
+          <mxGeometry height="24" width="200" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="noOLpXe0ZnMtauas5kys-81" parent="noOLpXe0ZnMtauas5kys-79" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;rounded=0;" value="Nombre  (UK)" vertex="1">
+          <mxGeometry height="24" width="200" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="noOLpXe0ZnMtauas5kys-82" parent="noOLpXe0ZnMtauas5kys-79" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;rounded=0;" value="Descripcion" vertex="1">
+          <mxGeometry height="24" width="200" y="74" as="geometry" />
+        </mxCell>
+        <mxCell id="noOLpXe0ZnMtauas5kys-83" parent="noOLpXe0ZnMtauas5kys-79" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;rounded=0;" value="Precio" vertex="1">
+          <mxGeometry height="24" width="200" y="98" as="geometry" />
+        </mxCell>
+        <mxCell id="servicio-estado" parent="noOLpXe0ZnMtauas5kys-79" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;rounded=0;" value="Estado" vertex="1">
+          <mxGeometry height="24" width="200" y="122" as="geometry" />
+        </mxCell>
+        <mxCell id="noOLpXe0ZnMtauas5kys-84" parent="1" style="swimlane;fontStyle=1;align=center;startSize=26;horizontal=1;collapsible=0;fillColor=#e1d5e7;strokeColor=#9673a6;" value="Usuario" vertex="1">
+          <mxGeometry height="122" width="210" x="620" y="570" as="geometry" />
+        </mxCell>
+        <mxCell id="noOLpXe0ZnMtauas5kys-85" parent="noOLpXe0ZnMtauas5kys-84" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;rounded=0;fontStyle=1;" value="IdUsuario  (PK)" vertex="1">
+          <mxGeometry height="24" width="200" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="noOLpXe0ZnMtauas5kys-86" parent="noOLpXe0ZnMtauas5kys-84" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;rounded=0;" value="NombreUsuario  (UK)" vertex="1">
+          <mxGeometry height="24" width="200" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="noOLpXe0ZnMtauas5kys-87" parent="noOLpXe0ZnMtauas5kys-84" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;rounded=0;" value="ContrasenaHash" vertex="1">
+          <mxGeometry height="24" width="200" y="74" as="geometry" />
+        </mxCell>
+        <mxCell id="noOLpXe0ZnMtauas5kys-88" parent="noOLpXe0ZnMtauas5kys-84" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;rounded=0;" value="Rol" vertex="1">
+          <mxGeometry height="24" width="200" y="98" as="geometry" />
+        </mxCell>
+        <mxCell id="noOLpXe0ZnMtauas5kys-89" edge="1" parent="1" source="noOLpXe0ZnMtauas5kys-49" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=ERmandOne;endArrow=ERzeroToMany;startFill=0;endFill=0;startSize=14;endSize=14;labelBackgroundColor=#ffffff;fontSize=12;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="noOLpXe0ZnMtauas5kys-57" value="posee">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="noOLpXe0ZnMtauas5kys-90" edge="1" parent="1" source="noOLpXe0ZnMtauas5kys-57" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=ERmandOne;endArrow=ERzeroToMany;startFill=0;endFill=0;startSize=14;endSize=14;labelBackgroundColor=#ffffff;fontSize=12;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="noOLpXe0ZnMtauas5kys-70" value="tiene">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="noOLpXe0ZnMtauas5kys-91" edge="1" parent="1" source="noOLpXe0ZnMtauas5kys-64" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=ERmandOne;endArrow=ERzeroToMany;startFill=0;endFill=0;startSize=14;endSize=14;labelBackgroundColor=#ffffff;fontSize=12;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="noOLpXe0ZnMtauas5kys-70" value="atiende">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="noOLpXe0ZnMtauas5kys-92" edge="1" parent="1" source="noOLpXe0ZnMtauas5kys-70" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=ERmandOne;endArrow=ERzeroToMany;startFill=0;endFill=0;startSize=14;endSize=14;labelBackgroundColor=#ffffff;fontSize=12;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="noOLpXe0ZnMtauas5kys-75" value="incluye">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="noOLpXe0ZnMtauas5kys-93" edge="1" parent="1" source="noOLpXe0ZnMtauas5kys-79" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=ERmandOne;endArrow=ERzeroToMany;startFill=0;endFill=0;startSize=14;endSize=14;labelBackgroundColor=#ffffff;fontSize=12;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="noOLpXe0ZnMtauas5kys-75" value="se aplica en">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="noOLpXe0ZnMtauas5kys-94" parent="1" style="text;html=1;whiteSpace=wrap;align=left;verticalAlign=top;fillColor=#fff2cc;strokeColor=#d6b656;spacing=8;fontSize=12;" value="Notas:&lt;br&gt;• Cita.Estado: Pendiente, Confirmada, Atendida o Cancelada.&lt;br&gt;• Un veterinario no puede tener dos citas a la misma hora.&lt;br&gt;• DetalleCita resuelve la relación muchos a muchos entre Cita y Servicio.&lt;br&gt;• Usuario no se relaciona con otras entidades: solo se usa para el inicio de sesión.&lt;br&gt;• (PK) como llave primaria, (UK) como valor único." vertex="1">
+          <mxGeometry height="122" width="500" x="10" y="630" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

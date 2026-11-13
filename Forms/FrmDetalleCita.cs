@@ -13,6 +13,7 @@ namespace VetCare
         {
             InitializeComponent();
             this.cita = cita;
+            lblCita.Text = $"Cita {cita.IdCita}   ·   {cita.NombreMascota}   ·   {cita.FechaHora:dd/MM/yyyy HH:mm}";
             Text = $"Servicios de la cita {cita.IdCita} · {cita.FechaHora:dd/MM/yyyy HH:mm}";
         }
 
@@ -25,8 +26,8 @@ namespace VetCare
                 {
                     if (servicio.Estado) lstServicios.Items.Add(servicio);
                 }
-                btnAgregar.Enabled = lstServicios.Items.Count > 0;
-                if (!btnAgregar.Enabled) MostrarError(lstServicios, "No hay servicios activos.");
+                btnAgregarServicio.Enabled = lstServicios.Items.Count > 0;
+                if (!btnAgregarServicio.Enabled) MostrarError(lstServicios, "No hay servicios activos.");
             }
             catch (SqlException)
             {
@@ -40,7 +41,7 @@ namespace VetCare
             {
                 cita.Detalles = logica.Listar(cita.IdCita);
                 dgvDetalles.DataSource = cita.Detalles;
-                lblTotal.Text = $"Total de la cita: {cita.Total:N2}";
+                lblTotal.Text = $"Total de la cita   ₡{cita.Total:N2}";
             }
             catch (SqlException)
             {
@@ -78,7 +79,7 @@ namespace VetCare
                 if (!logica.Agregar(cita.IdCita, servicio.IdServicio, cantidad))
                 {
                     lstServicios.Items.Remove(servicio);
-                    btnAgregar.Enabled = lstServicios.Items.Count > 0;
+                    btnAgregarServicio.Enabled = lstServicios.Items.Count > 0;
                     MostrarError(lstServicios, "El servicio ya no está disponible.");
                     return;
                 }

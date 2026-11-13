@@ -95,7 +95,6 @@ namespace VetCare
             dgvUsuarios.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvUsuarios.ColumnHeadersHeight = 32;
             dgvUsuarios.Columns.Add("colNombre", "Nombre de usuario");
-            dgvUsuarios.Columns["colNombre"].DataPropertyName = nameof(Usuario.NombreUsuario);
             dgvUsuarios.Columns.Add("colRol", "Rol");
             dgvUsuarios.Columns["colRol"].DataPropertyName = nameof(Usuario.Rol);
             Controls.Add(dgvUsuarios);

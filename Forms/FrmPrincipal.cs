@@ -1,4 +1,6 @@
 using VetCare.UI.Modelos;
+using VetCare.UI.Logica;
+using Microsoft.Data.SqlClient;
 
 namespace VetCare
 {
@@ -12,6 +14,24 @@ namespace VetCare
             btnVeterinarios.Enabled = esAdministrador;
             btnServicios.Enabled = esAdministrador;
             btnUsuarios.Enabled = esAdministrador;
+        }
+
+        private void CargarAgenda(object? sender, EventArgs e)
+        {
+            dgvAgenda.Rows.Clear();
+            try
+            {
+                List<Cita> citas = new CitaLogica().Listar(fecha: dtpAgenda.Value.Date);
+                citas.Reverse();
+                foreach (Cita cita in citas)
+                    dgvAgenda.Rows.Add(cita.FechaHora.ToString("HH:mm"), cita.NombreMascota, cita.Motivo, cita.Estado);
+                lblResultado.Text = citas.Count == 0 ? "No hay citas registradas para esta fecha." : $"Citas registradas: {citas.Count}";
+                dgvAgenda.ClearSelection();
+            }
+            catch (SqlException)
+            {
+                lblResultado.Text = "No se pudo cargar la agenda. Comprueba la conexión y pulsa Actualizar.";
+            }
         }
 
         private void btnPropietarios_Click(object? sender, EventArgs e)
@@ -30,6 +50,7 @@ namespace VetCare
         {
             using FrmCitas formulario = new FrmCitas();
             formulario.ShowDialog(this);
+            CargarAgenda(this, EventArgs.Empty);
         }
 
         private void btnVeterinarios_Click(object? sender, EventArgs e)

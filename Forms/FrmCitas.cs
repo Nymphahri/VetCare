@@ -55,6 +55,7 @@ namespace VetCare
                     {
                         case "IdCita": columna.HeaderText = "Código de cita"; break;
                         case "IdMascota": columna.HeaderText = "Código de mascota"; break;
+                        case "NombreMascota": columna.HeaderText = "Mascota"; break;
                         case "IdVeterinario": columna.HeaderText = "Código de veterinario"; break;
                         case "FechaHora":
                             columna.HeaderText = "Fecha y hora";
@@ -80,7 +81,7 @@ namespace VetCare
             btnConfirmar.Enabled = false;
             btnServicios.Enabled = false;
             btnAtender.Enabled = false;
-            btnReprogramar.Enabled = false;
+            btnReprogramarCita.Enabled = false;
             if (dgvCitas.SelectedRows.Count == 0) return;
             Cita? cita = dgvCitas.SelectedRows[0].DataBoundItem as Cita;
             if (cita != null)
@@ -89,7 +90,7 @@ namespace VetCare
                 btnConfirmar.Enabled = cita.Estado == "Pendiente";
                 btnCancelar.Enabled = cita.Estado == "Pendiente" || cita.Estado == "Confirmada";
                 btnAtender.Enabled = cita.Estado == "Pendiente" || cita.Estado == "Confirmada";
-                btnReprogramar.Enabled = btnAtender.Enabled;
+                btnReprogramarCita.Enabled = btnAtender.Enabled;
             }
         }
 

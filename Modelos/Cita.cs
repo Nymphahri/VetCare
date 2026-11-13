@@ -5,6 +5,7 @@ namespace VetCare.UI.Modelos
     {
         public int IdCita { get; set; }
         public int IdMascota { get; set; }
+        public string NombreMascota { get; set; } = "";
         public int IdVeterinario { get; set; }
         public DateTime FechaHora { get; set; }
         public string Estado { get; set; }
