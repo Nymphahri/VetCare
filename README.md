@@ -39,9 +39,9 @@ Ambos roles pueden registrar propietarios y mascotas, agendar citas y agregar se
 
 En **Administración → Servicios**, el administrador mantiene los precios y la disponibilidad del catálogo. Al desactivar un servicio se conserva su historial. Al cancelar una cita se conserva el registro y se libera el horario del veterinario.
 
-El [manual técnico de VetCare](docs/Manual%20tecnico%20de%20VetCare.docx) incluye el modelo de clases, el diagrama entidad-relación, el modelo relacional y el diccionario de datos.
+El [manual técnico de VetCare](Documentos/Manual%20tecnico%20de%20VetCare.docx) incluye el modelo de clases, el diagrama entidad-relación, el modelo relacional y el diccionario de datos.
 
-El [manual de usuario](docs/Manual%20de%20usuario.docx) explica cómo trabajar con la agenda, registrar pacientes y administrar el catálogo.
+El [manual de usuario](Documentos/Manual%20de%20usuario.docx) explica cómo trabajar con la agenda, registrar pacientes y administrar el catálogo.
 
 ## Organización del proyecto
 
