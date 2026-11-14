@@ -15,11 +15,12 @@ namespace VetCare.UI.Datos
         public List<Mascota> Buscar(string texto)
         {
             List<Mascota> mascotas = new List<Mascota>();
-            string consulta = "SELECT IdMascota, IdPropietario, Nombre, Especie, Raza, " +
-                "FechaNacimiento, FechaRegistro FROM Mascota " +
-                "WHERE @Busqueda = '' OR CHARINDEX(@Busqueda, Nombre) > 0 OR " +
-                "CHARINDEX(@Busqueda, Especie) > 0 OR CHARINDEX(@Busqueda, Raza) > 0 " +
-                "ORDER BY IdMascota DESC";
+            string consulta = "SELECT m.IdMascota, m.IdPropietario, m.Nombre, m.Especie, m.Raza, " +
+                "m.FechaNacimiento, m.FechaRegistro, p.Nombre + ' ' + p.Apellidos " +
+                "FROM Mascota m INNER JOIN Propietario p ON p.IdPropietario = m.IdPropietario " +
+                "WHERE @Busqueda = '' OR CHARINDEX(@Busqueda, m.Nombre) > 0 OR " +
+                "CHARINDEX(@Busqueda, m.Especie) > 0 OR CHARINDEX(@Busqueda, m.Raza) > 0 " +
+                "ORDER BY m.IdMascota DESC";
 
             using SqlConnection conexionSql = conexion.ObtenerConexion();
             using SqlCommand comando = new SqlCommand(consulta, conexionSql);
@@ -34,7 +35,8 @@ namespace VetCare.UI.Datos
 
                 mascotas.Add(new Mascota(
                     lector.GetInt32(0), lector.GetInt32(1), lector.GetString(2),
-                    lector.GetString(3), raza, lector.GetDateTime(5), lector.GetDateTime(6)));
+                    lector.GetString(3), raza, lector.GetDateTime(5), lector.GetDateTime(6))
+                    { NombrePropietario = lector.GetString(7) });
             }
 
             return mascotas;

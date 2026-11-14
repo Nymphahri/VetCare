@@ -211,7 +211,8 @@ namespace VetCare
                     switch (columna.Name)
                     {
                         case "IdMascota": columna.HeaderText = "Código"; break;
-                        case "IdPropietario": columna.HeaderText = "Código propietario"; break;
+                        case "IdPropietario": columna.Visible = false; break;
+                        case "NombrePropietario": columna.HeaderText = "Propietario"; break;
                         case "FechaNacimiento":
                             columna.HeaderText = "Fecha de nacimiento";
                             columna.DefaultCellStyle.Format = "dd/MM/yyyy";

@@ -28,12 +28,12 @@ namespace VetCare
             lblError.Text = "";
             if (string.IsNullOrWhiteSpace(txtUsuario.Text))
             {
-                MostrarError(txtUsuario, "Escribe tu nombre de usuario.");
+                MostrarError(txtUsuario, "Escriba su nombre de usuario.");
                 return;
             }
             if (txtContrasena.Text.Length == 0)
             {
-                MostrarError(txtContrasena, "Escribe tu contraseña.");
+                MostrarError(txtContrasena, "Escriba su contraseña.");
                 return;
             }
             try
@@ -42,6 +42,11 @@ namespace VetCare
                 txtContrasena.Clear();
                 if (UsuarioAutenticado == null)
                     MostrarError(txtContrasena, "Usuario o contraseña incorrectos.");
+                else if (UsuarioAutenticado.Rol != "Administrador" && UsuarioAutenticado.Rol != "Recepcionista")
+                {
+                    UsuarioAutenticado = null;
+                    MostrarError(txtUsuario, "Esta cuenta no tiene un rol con acceso a VetCare.");
+                }
                 else
                     DialogResult = DialogResult.OK;
             }

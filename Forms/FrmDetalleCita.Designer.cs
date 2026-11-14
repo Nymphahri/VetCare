@@ -6,6 +6,7 @@ namespace VetCare
     {
         private System.ComponentModel.IContainer components = null;
         private ErrorProvider errorProvider;
+        private Guna2Button btnVolver;
         private Label lblTituloServicioCita;
         private Label lblCita;
         private Label lblServiciosRegistrados;
@@ -27,12 +28,15 @@ namespace VetCare
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmDetalleCita));
             errorProvider = new ErrorProvider(components);
             lblTituloServicioCita = new Label();
             lblCita = new Label();
@@ -45,6 +49,7 @@ namespace VetCare
             lblServiciosRegistrados = new Label();
             dgvDetalles = new Guna2DataGridView();
             lblTotal = new Label();
+            btnVolver = new Guna2Button();
             ((System.ComponentModel.ISupportInitialize)errorProvider).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvDetalles).BeginInit();
             SuspendLayout();
@@ -100,14 +105,14 @@ namespace VetCare
             // txtCantidad
             // 
             txtCantidad.BorderRadius = 5;
-            txtCantidad.CustomizableEdges = customizableEdges5;
+            txtCantidad.CustomizableEdges = customizableEdges3;
             txtCantidad.DefaultText = "1";
             txtCantidad.Font = new Font("Segoe UI", 9F);
             txtCantidad.Location = new Point(466, 126);
             txtCantidad.Name = "txtCantidad";
             txtCantidad.PlaceholderText = "";
             txtCantidad.SelectedText = "";
-            txtCantidad.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            txtCantidad.ShadowDecoration.CustomizableEdges = customizableEdges4;
             txtCantidad.Size = new Size(110, 36);
             txtCantidad.TabIndex = 1;
             // 
@@ -122,7 +127,7 @@ namespace VetCare
             // btnAgregarServicio
             // 
             btnAgregarServicio.BorderRadius = 6;
-            btnAgregarServicio.CustomizableEdges = customizableEdges7;
+            btnAgregarServicio.CustomizableEdges = customizableEdges5;
             btnAgregarServicio.Enabled = false;
             btnAgregarServicio.FillColor = Color.FromArgb(17, 107, 94);
             btnAgregarServicio.FillColor2 = Color.FromArgb(17, 107, 94);
@@ -130,7 +135,7 @@ namespace VetCare
             btnAgregarServicio.ForeColor = Color.White;
             btnAgregarServicio.Location = new Point(466, 189);
             btnAgregarServicio.Name = "btnAgregarServicio";
-            btnAgregarServicio.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            btnAgregarServicio.ShadowDecoration.CustomizableEdges = customizableEdges6;
             btnAgregarServicio.Size = new Size(180, 38);
             btnAgregarServicio.TabIndex = 2;
             btnAgregarServicio.Text = "Agregar servicio";
@@ -151,24 +156,24 @@ namespace VetCare
             dgvDetalles.AllowUserToAddRows = false;
             dgvDetalles.AllowUserToDeleteRows = false;
             dgvDetalles.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.FromArgb(222, 235, 229);
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle3.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(222, 235, 229);
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            dgvDetalles.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(222, 235, 229);
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(222, 235, 229);
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dgvDetalles.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvDetalles.ColumnHeadersHeight = 38;
             dgvDetalles.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = Color.White;
-            dataGridViewCellStyle4.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle4.ForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewCellStyle4.SelectionBackColor = Color.FromArgb(202, 229, 218);
-            dataGridViewCellStyle4.SelectionForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
-            dgvDetalles.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.White;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle2.ForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(202, 229, 218);
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dgvDetalles.DefaultCellStyle = dataGridViewCellStyle2;
             dgvDetalles.GridColor = Color.FromArgb(231, 229, 255);
             dgvDetalles.Location = new Point(28, 285);
             dgvDetalles.Name = "dgvDetalles";
@@ -199,12 +204,29 @@ namespace VetCare
             lblTotal.TabIndex = 6;
             lblTotal.TextAlign = ContentAlignment.MiddleRight;
             // 
+            // btnVolver
+            // 
+            btnVolver.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnVolver.BorderRadius = 6;
+            btnVolver.CustomizableEdges = customizableEdges1;
+            btnVolver.FillColor = Color.FromArgb(224, 238, 232);
+            btnVolver.Font = new Font("Segoe UI", 9F);
+            btnVolver.ForeColor = Color.FromArgb(21, 62, 61);
+            btnVolver.Location = new Point(626, 16);
+            btnVolver.Name = "btnVolver";
+            btnVolver.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            btnVolver.Size = new Size(146, 36);
+            btnVolver.TabIndex = 0;
+            btnVolver.Text = "Volver a citas";
+            btnVolver.Click += btnVolver_Click;
+            // 
             // FrmDetalleCita
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(247, 249, 247);
             ClientSize = new Size(800, 580);
+            Controls.Add(btnVolver);
             Controls.Add(lblTituloServicioCita);
             Controls.Add(lblCita);
             Controls.Add(lblServicioCita);
@@ -217,9 +239,11 @@ namespace VetCare
             Controls.Add(dgvDetalles);
             Controls.Add(lblTotal);
             ForeColor = Color.FromArgb(21, 62, 61);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MinimumSize = new Size(816, 619);
             Name = "FrmDetalleCita";
             StartPosition = FormStartPosition.CenterParent;
+            Text = "VetCare";
             Load += FrmDetalleCita_Load;
             ((System.ComponentModel.ISupportInitialize)errorProvider).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvDetalles).EndInit();

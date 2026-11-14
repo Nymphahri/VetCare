@@ -7,11 +7,28 @@ namespace VetCare
     public partial class FrmDetalleCita : Form
     {
         private Cita cita;
+
+        private void btnVolver_Click(object? sender, EventArgs e)
+        {
+            Close();
+        }
         private DetalleCitaLogica logica = new DetalleCitaLogica();
 
         public FrmDetalleCita(Cita cita)
         {
             InitializeComponent();
+            dgvDetalles.AutoGenerateColumns = false;
+            dgvDetalles.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvDetalles.Columns.Add(new DataGridViewTextBoxColumn {
+                Name = "Servicio", HeaderText = "Servicio", DataPropertyName = nameof(DetalleCita.NombreServicio) });
+            dgvDetalles.Columns.Add(new DataGridViewTextBoxColumn {
+                Name = "Cantidad", HeaderText = "Cantidad", DataPropertyName = nameof(DetalleCita.Cantidad) });
+            dgvDetalles.Columns.Add(new DataGridViewTextBoxColumn {
+                Name = "Precio", HeaderText = "Precio aplicado (₡)", DataPropertyName = nameof(DetalleCita.PrecioAplicado),
+                DefaultCellStyle = new DataGridViewCellStyle { Format = "N2" } });
+            dgvDetalles.Columns.Add(new DataGridViewTextBoxColumn {
+                Name = "Subtotal", HeaderText = "Subtotal (₡)", DataPropertyName = nameof(DetalleCita.Subtotal),
+                DefaultCellStyle = new DataGridViewCellStyle { Format = "N2" } });
             this.cita = cita;
             lblCita.Text = $"Cita {cita.IdCita}   ·   {cita.NombreMascota}   ·   {cita.FechaHora:dd/MM/yyyy HH:mm}";
             Text = $"Servicios de la cita {cita.IdCita} · {cita.FechaHora:dd/MM/yyyy HH:mm}";
@@ -20,6 +37,14 @@ namespace VetCare
         private void FrmDetalleCita_Load(object? sender, EventArgs e)
         {
             CargarDetalles();
+            if (cita.Estado == "Cancelada")
+            {
+                lblCita.Text += "   ·   Cancelada (solo consulta)";
+                lstServicios.Enabled = false;
+                txtCantidad.Enabled = false;
+                btnAgregarServicio.Enabled = false;
+                return;
+            }
             try
             {
                 foreach (Servicio servicio in new ServicioLogica().Listar())
@@ -78,9 +103,8 @@ namespace VetCare
             {
                 if (!logica.Agregar(cita.IdCita, servicio.IdServicio, cantidad))
                 {
-                    lstServicios.Items.Remove(servicio);
-                    btnAgregarServicio.Enabled = lstServicios.Items.Count > 0;
-                    MostrarError(lstServicios, "El servicio ya no está disponible.");
+                    MessageBox.Show("Revisa el estado de la cita y la disponibilidad del servicio antes de reintentar.",
+                        "No se agregó el servicio");
                     return;
                 }
                 txtCantidad.Text = "1";

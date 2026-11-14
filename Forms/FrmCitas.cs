@@ -7,11 +7,19 @@ namespace VetCare
     public partial class FrmCitas : Form
     {
         private CitaLogica citaLogica = new CitaLogica();
+        public event Action<Cita>? VerServicios;
 
         public FrmCitas()
         {
             InitializeComponent();
             dtpFechaHora.Value = DateTime.Now;
+        }
+
+        public FrmCitas(DateTime fechaAgenda) : this()
+        {
+            dtpFechaHora.Value = fechaAgenda.Date + DateTime.Now.TimeOfDay;
+            dtpBuscarFecha.Value = fechaAgenda.Date;
+            chkBuscarFecha.Checked = true;
         }
 
         private void FrmCitas_Load(object? sender, EventArgs e)
@@ -37,7 +45,21 @@ namespace VetCare
         private void FiltrosCita_Changed(object? sender, EventArgs e)
         {
             dtpBuscarFecha.Enabled = chkBuscarFecha.Checked;
-            CargarCitas();
+            if (Visible) CargarCitas();
+        }
+
+        internal bool SeleccionarCita(int idCita)
+        {
+            foreach (DataGridViewRow fila in dgvCitas.Rows)
+            {
+                if (fila.DataBoundItem is Cita cita && cita.IdCita == idCita)
+                {
+                    dgvCitas.CurrentCell = fila.Cells["IdCita"];
+                    fila.Selected = true;
+                    return true;
+                }
+            }
+            return false;
         }
 
         private void CargarCitas()
@@ -54,13 +76,14 @@ namespace VetCare
                     switch (columna.Name)
                     {
                         case "IdCita": columna.HeaderText = "Código de cita"; break;
-                        case "IdMascota": columna.HeaderText = "Código de mascota"; break;
                         case "NombreMascota": columna.HeaderText = "Mascota"; break;
-                        case "IdVeterinario": columna.HeaderText = "Código de veterinario"; break;
+                        case "NombreVeterinario": columna.HeaderText = "Veterinario"; break;
                         case "FechaHora":
                             columna.HeaderText = "Fecha y hora";
                             columna.DefaultCellStyle.Format = "dd/MM/yyyy HH:mm";
                             break;
+                        case "IdMascota":
+                        case "IdVeterinario":
                         case "Total":
                         case "Detalles": columna.Visible = false; break;
                     }
@@ -132,10 +155,7 @@ namespace VetCare
         {
             if (dgvCitas.SelectedRows.Count == 0) return;
             if (dgvCitas.SelectedRows[0].DataBoundItem is Cita cita)
-            {
-                using FrmDetalleCita formulario = new FrmDetalleCita(cita);
-                formulario.ShowDialog(this);
-            }
+                VerServicios?.Invoke(cita);
         }
 
         private void btnAtender_Click(object? sender, EventArgs e)
@@ -205,13 +225,23 @@ namespace VetCare
         private void lstMascotas_Format(object? sender, ListControlConvertEventArgs e)
         {
             if (e.ListItem is Mascota mascota)
-                e.Value = mascota.Nombre + " (código " + mascota.IdMascota + ")";
+                e.Value = $"{mascota.Nombre} · {mascota.NombrePropietario}";
         }
 
         private void lstVeterinarios_Format(object? sender, ListControlConvertEventArgs e)
         {
-            if (e.ListItem is Veterinario veterinario)
-                e.Value = veterinario.NombreCompleto + " (código " + veterinario.IdVeterinario + ")";
+            if (e.ListItem is not Veterinario veterinario) return;
+            e.Value = veterinario.NombreCompleto;
+            if (lstVeterinarios.DataSource is not List<Veterinario> veterinarios) return;
+            foreach (Veterinario otro in veterinarios)
+            {
+                if (otro.IdVeterinario != veterinario.IdVeterinario &&
+                    string.Equals(otro.NombreCompleto, veterinario.NombreCompleto, StringComparison.OrdinalIgnoreCase))
+                {
+                    e.Value = $"{veterinario.NombreCompleto} - {veterinario.Especialidad}";
+                    break;
+                }
+            }
         }
 
         private void MostrarError(Control campo, string mensaje)

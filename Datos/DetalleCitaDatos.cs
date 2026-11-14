@@ -31,8 +31,11 @@ namespace VetCare.UI.Datos
         public bool Agregar(int idCita, int idServicio, int cantidad)
         {
             const string consulta = @"INSERT INTO DetalleCita (IdCita, IdServicio, Cantidad, PrecioAplicado)
-                SELECT @IdCita, IdServicio, @Cantidad, Precio FROM Servicio
-                WHERE IdServicio = @IdServicio AND Estado = 1";
+                SELECT c.IdCita, s.IdServicio, @Cantidad, s.Precio
+                FROM Cita c WITH (UPDLOCK, HOLDLOCK)
+                CROSS JOIN Servicio s
+                WHERE c.IdCita = @IdCita AND c.Estado <> 'Cancelada'
+                AND s.IdServicio = @IdServicio AND s.Estado = 1";
             using SqlConnection conexion = conexionBD.ObtenerConexion();
             using SqlCommand comando = new SqlCommand(consulta, conexion);
             comando.Parameters.AddWithValue("@IdCita", idCita);

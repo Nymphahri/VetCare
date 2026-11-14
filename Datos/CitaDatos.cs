@@ -11,8 +11,11 @@ namespace VetCare.UI.Datos
         public List<Cita> Listar(string nombreMascota = "", DateTime? fecha = null, string estado = "")
         {
             List<Cita> citas = new List<Cita>();
-            string consulta = "SELECT c.IdCita, c.IdMascota, c.IdVeterinario, c.FechaHora, c.Estado, c.Motivo, m.Nombre " +
+            string consulta = "SELECT c.IdCita, c.IdMascota, c.IdVeterinario, c.FechaHora, c.Estado, c.Motivo, m.Nombre, " +
+                "v.Nombre + ' ' + v.Apellidos AS NombreVeterinario, p.Nombre + ' ' + p.Apellidos, m.Especie " +
                 "FROM Cita c INNER JOIN Mascota m ON m.IdMascota = c.IdMascota " +
+                "INNER JOIN Veterinario v ON v.IdVeterinario = c.IdVeterinario " +
+                "INNER JOIN Propietario p ON p.IdPropietario = m.IdPropietario " +
                 "WHERE (@Nombre = '' OR CHARINDEX(@Nombre, m.Nombre) > 0) " +
                 "AND (@Fecha IS NULL OR CAST(c.FechaHora AS date) = @Fecha) " +
                 "AND (@Estado = '' OR c.Estado = @Estado) " +
@@ -31,6 +34,9 @@ namespace VetCare.UI.Datos
                 Cita cita = new Cita(lector.GetInt32(0), lector.GetInt32(1), lector.GetInt32(2),
                     lector.GetDateTime(3), lector.GetString(4), motivo);
                 cita.NombreMascota = lector.GetString(6);
+                cita.NombreVeterinario = lector.GetString(7);
+                cita.NombrePropietario = lector.GetString(8);
+                cita.Especie = lector.GetString(9);
                 citas.Add(cita);
             }
             return citas;

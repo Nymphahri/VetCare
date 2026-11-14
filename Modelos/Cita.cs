@@ -7,6 +7,11 @@ namespace VetCare.UI.Modelos
         public int IdMascota { get; set; }
         public string NombreMascota { get; set; } = "";
         public int IdVeterinario { get; set; }
+        public string NombreVeterinario { get; set; } = "";
+        [System.ComponentModel.Browsable(false)]
+        public string NombrePropietario { get; set; } = "";
+        [System.ComponentModel.Browsable(false)]
+        public string Especie { get; set; } = "";
         public DateTime FechaHora { get; set; }
         public string Estado { get; set; }
         public string Motivo { get; set; }
