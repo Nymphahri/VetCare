@@ -97,14 +97,8 @@ namespace VetCare
             if (!MostrarValidacion(txtNombre, lblErrorNombre, servicioLogica.ValidarNombre(nombre))) return;
             if (!MostrarValidacion(txtDescripcion, lblErrorDescripcion, servicioLogica.ValidarDescripcion(descripcion))) return;
 
-            string textoPrecio = txtPrecio.Text.Trim().Replace(',', '.');
-            if (!decimal.TryParse(textoPrecio, NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign,
-                CultureInfo.InvariantCulture, out decimal precio))
-            {
-                MostrarValidacion(txtPrecio, lblErrorPrecio, "Escribe un precio sin separadores de miles.");
-                return;
-            }
-            if (!MostrarValidacion(txtPrecio, lblErrorPrecio, servicioLogica.ValidarPrecio(precio))) return;
+            string errorPrecio = servicioLogica.ValidarPrecio(txtPrecio.Text, out decimal precio);
+            if (!MostrarValidacion(txtPrecio, lblErrorPrecio, errorPrecio)) return;
 
             Servicio servicio = new Servicio(idServicioSeleccionado, nombre, descripcion, precio, lstEstado.SelectedIndex == 0);
             try

@@ -17,7 +17,7 @@ namespace VetCare.UI.Logica
         public Usuario? IniciarSesion(string nombre, string contrasena)
         {
             nombre = nombre.Trim();
-            if (nombre.Length == 0 || nombre.Length > 30 || string.IsNullOrEmpty(contrasena))
+            if (!NombreValido(nombre) || string.IsNullOrEmpty(contrasena))
                 return null;
 
             return usuarioDatos.BuscarPorCredenciales(nombre, CalcularHash(contrasena));
@@ -26,7 +26,7 @@ namespace VetCare.UI.Logica
         public bool Registrar(string nombre, string contrasena, string rol)
         {
             nombre = nombre.Trim();
-            if (nombre.Length == 0 || nombre.Length > 30 || string.IsNullOrWhiteSpace(contrasena))
+            if (!NombreValido(nombre) || !ContrasenaRegistroValida(contrasena))
                 return false;
             if (!EsRolValido(rol)) return false;
             return usuarioDatos.Registrar(nombre, CalcularHash(contrasena), rol);
@@ -34,12 +34,19 @@ namespace VetCare.UI.Logica
 
         public bool CambiarRol(Usuario usuario, string nuevoRol)
         {
-            if (usuario.IdUsuario <= 0 || !EsRolValido(nuevoRol) || usuario.Rol == nuevoRol)
+            if (!PuedeCambiarRol(usuario, nuevoRol))
                 return false;
             return usuarioDatos.CambiarRol(usuario, nuevoRol);
         }
 
-        private bool EsRolValido(string rol)
+        public static bool NombreValido(string nombre) => nombre.Trim().Length > 0 && nombre.Trim().Length <= 30;
+
+        public static bool ContrasenaRegistroValida(string contrasena) => !string.IsNullOrWhiteSpace(contrasena);
+
+        public static bool PuedeCambiarRol(Usuario usuario, string nuevoRol) =>
+            usuario.IdUsuario > 0 && EsRolValido(nuevoRol) && usuario.Rol != nuevoRol;
+
+        public static bool EsRolValido(string rol)
         {
             return rol == "Administrador" || rol == "Recepcionista";
         }

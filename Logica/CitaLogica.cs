@@ -7,6 +7,15 @@ namespace VetCare.UI.Logica
     {
         private CitaDatos citaDatos = new CitaDatos();
 
+        public static bool PuedeConfirmar(Cita cita) => cita.Estado == "Pendiente";
+
+        public static bool EstaAbierta(Cita cita) => PuedeConfirmar(cita) || cita.Estado == "Confirmada";
+
+        public static bool PermiteAgregarServicios(Cita cita) => cita.Estado != "Cancelada";
+
+        public static bool CambiaHorario(Cita cita, DateTime horario) =>
+            HorarioAlMinuto(cita.FechaHora) != HorarioAlMinuto(horario);
+
         public List<Cita> Listar(string nombreMascota = "", DateTime? fecha = null, string estado = "")
         {
             return citaDatos.Listar(nombreMascota.Trim(), fecha, estado);
@@ -38,7 +47,7 @@ namespace VetCare.UI.Logica
 
         public bool Reprogramar(Cita cita, DateTime fechaHora)
         {
-            if (cita.IdCita <= 0) return false;
+            if (cita.IdCita <= 0 || !CambiaHorario(cita, fechaHora)) return false;
             return citaDatos.Reprogramar(cita, HorarioAlMinuto(fechaHora));
         }
 

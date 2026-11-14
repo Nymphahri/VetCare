@@ -12,6 +12,21 @@ namespace VetCare.UI.Logica
             return servicioDatos.Listar();
         }
 
+        public List<Servicio> ListarActivos()
+        {
+            return Listar().FindAll(servicio => servicio.Estado);
+        }
+
+        public string ValidarPrecio(string texto, out decimal precio)
+        {
+            string normalizado = texto.Trim().Replace(',', '.');
+            if (!decimal.TryParse(normalizado, System.Globalization.NumberStyles.AllowDecimalPoint |
+                System.Globalization.NumberStyles.AllowLeadingSign, System.Globalization.CultureInfo.InvariantCulture, out precio))
+                return "Escribe un precio sin separadores de miles.";
+
+            return ValidarPrecio(precio);
+        }
+
         public string ValidarNombre(string nombre)
         {
             if (string.IsNullOrWhiteSpace(nombre)) return "El nombre es obligatorio.";

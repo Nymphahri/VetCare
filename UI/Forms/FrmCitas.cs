@@ -110,10 +110,11 @@ namespace VetCare
             if (cita != null)
             {
                 btnServicios.Enabled = true;
-                btnConfirmar.Enabled = cita.Estado == "Pendiente";
-                btnCancelar.Enabled = cita.Estado == "Pendiente" || cita.Estado == "Confirmada";
-                btnAtender.Enabled = cita.Estado == "Pendiente" || cita.Estado == "Confirmada";
-                btnReprogramarCita.Enabled = btnAtender.Enabled;
+                btnConfirmar.Enabled = CitaLogica.PuedeConfirmar(cita);
+                bool abierta = CitaLogica.EstaAbierta(cita);
+                btnCancelar.Enabled = abierta;
+                btnAtender.Enabled = abierta;
+                btnReprogramarCita.Enabled = abierta;
             }
         }
 
@@ -124,7 +125,7 @@ namespace VetCare
             errorProvider.Clear();
             lblError.Text = "";
             DateTime nuevoHorario = CitaLogica.HorarioAlMinuto(dtpFechaHora.Value);
-            if (nuevoHorario == CitaLogica.HorarioAlMinuto(cita.FechaHora))
+            if (!CitaLogica.CambiaHorario(cita, nuevoHorario))
             {
                 MostrarError(dtpFechaHora, "Elige una fecha u hora distinta de la actual.");
                 return;
@@ -183,7 +184,7 @@ namespace VetCare
         {
             if (dgvCitas.SelectedRows.Count == 0) return;
             Cita? cita = dgvCitas.SelectedRows[0].DataBoundItem as Cita;
-            if (cita == null || cita.Estado != "Pendiente") return;
+            if (cita == null || !CitaLogica.PuedeConfirmar(cita)) return;
 
             try
             {

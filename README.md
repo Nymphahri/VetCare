@@ -47,7 +47,7 @@ El [manual de usuario](Documentos/Manual%20de%20usuario.docx) explica cómo trab
 
 | Carpeta | Responsabilidad |
 |---|---|
-| `Forms` | Formularios, controles, eventos y mensajes de validación. |
+| `UI` | Interfaz visual. `UI/Forms` contiene los formularios con su diseñador y recursos. `SelectorFecha` es el control de fecha compartido. |
 | `Modelos` | Clases que representan personas, mascotas, citas, servicios y usuarios. Incluye los cálculos de edad, subtotal y total. |
 | `Logica` | Validación de datos y reglas que se aplican antes de guardar cambios. |
 | `Datos` | Conexión con SQL Server y consultas para leer y modificar registros. |

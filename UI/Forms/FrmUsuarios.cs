@@ -30,12 +30,12 @@ namespace VetCare
         {
             errorProvider.Clear();
             lblError.Text = "";
-            if (string.IsNullOrWhiteSpace(txtNombre.Text))
+            if (!UsuarioLogica.NombreValido(txtNombre.Text))
             {
                 MostrarError(txtNombre, "Escribe el nombre de usuario.");
                 return;
             }
-            if (string.IsNullOrWhiteSpace(txtContrasena.Text))
+            if (!UsuarioLogica.ContrasenaRegistroValida(txtContrasena.Text))
             {
                 MostrarError(txtContrasena, "Escribe una contraseña.");
                 return;
@@ -81,7 +81,7 @@ namespace VetCare
         {
             btnCambiarRol.Enabled = dgvUsuarios.SelectedRows.Count == 1
                 && dgvUsuarios.SelectedRows[0].DataBoundItem is Usuario usuario
-                && cboNuevoRol.SelectedItem is string rol && rol != usuario.Rol;
+                && cboNuevoRol.SelectedItem is string rol && UsuarioLogica.PuedeCambiarRol(usuario, rol);
         }
 
         private void btnCambiarRol_Click(object? sender, EventArgs e)

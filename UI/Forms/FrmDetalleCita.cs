@@ -37,7 +37,7 @@ namespace VetCare
         private void FrmDetalleCita_Load(object? sender, EventArgs e)
         {
             CargarDetalles();
-            if (cita.Estado == "Cancelada")
+            if (!CitaLogica.PermiteAgregarServicios(cita))
             {
                 lblCita.Text += "   ·   Cancelada (solo consulta)";
                 lstServicios.Enabled = false;
@@ -47,9 +47,9 @@ namespace VetCare
             }
             try
             {
-                foreach (Servicio servicio in new ServicioLogica().Listar())
+                foreach (Servicio servicio in new ServicioLogica().ListarActivos())
                 {
-                    if (servicio.Estado) lstServicios.Items.Add(servicio);
+                    lstServicios.Items.Add(servicio);
                 }
                 btnAgregarServicio.Enabled = lstServicios.Items.Count > 0;
                 if (!btnAgregarServicio.Enabled) MostrarError(lstServicios, "No hay servicios activos.");

@@ -26,7 +26,7 @@ namespace VetCare
         {
             errorProvider.Clear();
             lblError.Text = "";
-            if (string.IsNullOrWhiteSpace(txtUsuario.Text))
+            if (!UsuarioLogica.NombreValido(txtUsuario.Text))
             {
                 MostrarError(txtUsuario, "Escriba su nombre de usuario.");
                 return;
@@ -42,7 +42,7 @@ namespace VetCare
                 txtContrasena.Clear();
                 if (UsuarioAutenticado == null)
                     MostrarError(txtContrasena, "Usuario o contraseña incorrectos.");
-                else if (UsuarioAutenticado.Rol != "Administrador" && UsuarioAutenticado.Rol != "Recepcionista")
+                else if (!UsuarioLogica.EsRolValido(UsuarioAutenticado.Rol))
                 {
                     UsuarioAutenticado = null;
                     MostrarError(txtUsuario, "Esta cuenta no tiene un rol con acceso a VetCare.");

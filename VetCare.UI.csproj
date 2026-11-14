@@ -27,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="UI\FrmPrincipal.Agenda.resx">
+    <EmbeddedResource Update="UI\Forms\FrmPrincipal.Agenda.resx">
       <ManifestResourceName>VetCare.FrmPrincipal.Agenda</ManifestResourceName>
     </EmbeddedResource>
     <EmbeddedResource Update="Properties\Resources.resx">
