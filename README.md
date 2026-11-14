@@ -26,7 +26,7 @@ El script crea estas cuentas cuando la tabla de usuarios está vacía.
 
 | Usuario | Contraseña de prueba | Rol |
 |---|---|---|
-| `admin` | `123` | Administrador |
+| `admin` | `1234` | Administrador |
 | `recepcion` | `1234` | Recepcionista |
 
 Ambos roles pueden registrar propietarios y mascotas, agendar citas y agregar servicios a una cita. El administrador también gestiona los catálogos de veterinarios y servicios y las cuentas de usuario.
